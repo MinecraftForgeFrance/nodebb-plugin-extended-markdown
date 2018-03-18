@@ -1,0 +1,21 @@
+{
+    "id": "nodebb-plugin-mff-custombb",
+    "url": "https://github.com/MinecraftForgeFrance/nodebb-plugin-mff-custombb",
+    "library": "./library.js",
+    "staticDirs": {
+        "images": "public/images"
+    },
+    "less": [
+        "assets/style.less"
+    ],
+    "hooks": [
+        { "hook": "filter:parse.post", "method": "parsePost" }
+    ],
+    "scripts": [
+        "public/src/client.js"
+    ],
+    "acpScripts": [
+        "public/src/admin.js"
+    ],
+    "languages": "languages"
+}

@@ -1,0 +1,25 @@
+{
+  "name": "nodebb-plugin-mff-custombb",
+  "version": "1.0.0",
+  "description": "A NodeBB plugin to add some bb code, as tooltip, anchor, custom text header with background, etc. ",
+  "main": "library.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MinecraftForgeFrance/nodebb-plugin-mff-custombb.git"
+  },
+  "keywords": [
+    "nodebb",
+    "anchor",
+    "tooltip",
+    "text header"
+  ],
+  "author": "robin4002",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/MinecraftForgeFrance/nodebb-plugin-mff-custombb/issues"
+  },
+  "homepage": "https://github.com/MinecraftForgeFrance/nodebb-plugin-mff-custombb#readme",
+  "nbbpm": {
+    "compatibility": "^1.8.0"
+  }
+}
