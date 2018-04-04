@@ -3,19 +3,22 @@
     "url": "https://github.com/MinecraftForgeFrance/nodebb-plugin-mff-custombb",
     "library": "./library.js",
     "staticDirs": {
-        "images": "public/images"
+        "images": "static/images"
     },
     "less": [
-        "assets/style.less"
+        "static/style.less"
     ],
     "hooks": [
-        { "hook": "filter:parse.post", "method": "parsePost" }
+        { "hook": "filter:parse.post", "method": "parsePost"},
+        { "hook": "filter:parse.signature", "method": "parseSignature" },
+        { "hook": "filter:parse.aboutme", "method": "parseAboutMe"},
+        { "hook": "filter:parse.raw", "method": "parseRaw"}
     ],
     "scripts": [
-        "public/src/client.js"
+        "static/src/client.js"
     ],
     "acpScripts": [
-        "public/src/admin.js"
+        "static/src/admin.js"
     ],
     "languages": "languages"
 }
