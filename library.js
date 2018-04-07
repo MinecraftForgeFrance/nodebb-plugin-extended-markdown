@@ -3,7 +3,7 @@ const textHeaderRegex = /#([a-zA-Z]*)\((.*)\)/g;
 const textHeaderRegexP = /<p>#([a-zA-Z]*)\((.*)\)<\/p>/g;
 const tooltipRegex = /°(.*)°\((.*)\)/g;
 
-const codeTabRegex = /(?:<p>={3}group<\/p>\n)((?:<pre><code class=".+">[^]*<\/code><\/pre>\n){2,})(?:<p>={3}<\/p>)/;
+const codeTabRegex = /(?:<p>={3}group<\/p>\n)((?:<pre><code class=".+">[^]*?<\/code><\/pre>\n){2,})(?:<p>={3}<\/p>)/g;
 const langCodeRegex = /<code class="(.+)">/;
 
 const MFFCustomBB = {
@@ -11,6 +11,7 @@ const MFFCustomBB = {
     parsePost: function (data, callback) {
         if (data && data.postData && data.postData.content) {
             data.postData.content = applyMFFCustomBB(data.postData.content);
+            data.postData.content = applyGroupCode(data.postData.content, data.postData.pid)
         }
         callback(null, data);
     },
@@ -32,8 +33,18 @@ const MFFCustomBB = {
     parseRaw: function (data, callback) {
         if (data) {
             data = applyMFFCustomBB(data);
+            data = applyGroupCode(data, "")
         }
         callback(null, data);
+    },
+    registerFormating: (payload, callback) => {
+        const formating = [
+            {name: "grouped_code", className: "fa fa-code", title: "[[modules:composer.formatting.grouped_code]]"}
+        ];
+
+        payload.options = payload.options.concat(formating);
+
+        callback(null, payload);
     }
 };
 
@@ -58,6 +69,10 @@ function applyMFFCustomBB(textContent) {
             }
         });
     }
+    return textContent;
+}
+
+applyGroupCode = (textContent, id) => {
     if (textContent.match(codeTabRegex)) {
         let codeArray = codeTabRegex.exec(textContent);
         codeArray = codeArray[1].split(/<\/pre>\n<pre>/g);
@@ -70,20 +85,22 @@ function applyMFFCustomBB(textContent) {
         }
         codeArray[codeArray.length - 1] = "<pre>" + codeArray[codeArray.length - 1];
         lang[codeArray.length - 1] = langCodeRegex.exec(codeArray[codeArray.length - 1])[1];
+        let count = 0;
         textContent = textContent.replace(codeTabRegex, () => {
             let menuTab = "<ul class='nav nav-tabs' role='tablist'>";
             let contentTab = "<div class='tab-content'>";
             for (let i = 0; i < lang.length; i++) {
-                menuTab += `<li role='presentation' ${i === 0 ? "class='active'" : ""}><a href='#${lang[i]}' aria-controls='${lang[i]}' role='tab' data-toggle='tab'>${capitalizeFirstLetter(lang[i])}</a></li>`;
-                contentTab += `<div role="tabpanel" class="tab-pane ${i === 0 ? "active" : ""}" id="${lang[i]}">${codeArray[i]}</div>`;
+                menuTab += `<li role='presentation' ${i === 0 ? "class='active'" : ""}><a href='#${lang[i] + count + id}' aria-controls='${lang[i]}' role='tab' data-toggle='tab'>${capitalizeFirstLetter(lang[i])}</a></li>`;
+                contentTab += `<div role="tabpanel" class="tab-pane ${i === 0 ? "active" : ""}" id="${lang[i] + count + id}">${codeArray[i]}</div>`;
             }
             menuTab += "</ul>";
             contentTab += "</div>";
+            count++;
             return menuTab + contentTab;
         });
     }
     return textContent;
-}
+};
 
 function capitalizeFirstLetter(name) {
     return name.charAt(0).toUpperCase() + name.slice(1);

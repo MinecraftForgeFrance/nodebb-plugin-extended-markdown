@@ -12,7 +12,8 @@
         { "hook": "filter:parse.post", "method": "parsePost"},
         { "hook": "filter:parse.signature", "method": "parseSignature" },
         { "hook": "filter:parse.aboutme", "method": "parseAboutMe"},
-        { "hook": "filter:parse.raw", "method": "parseRaw"}
+        { "hook": "filter:parse.raw", "method": "parseRaw"},
+        { "hook": "filter:composer.formatting", "method": "registerFormating"}
     ],
     "scripts": [
         "static/src/client.js"
