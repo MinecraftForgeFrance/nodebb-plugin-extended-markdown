@@ -1,4 +1,12 @@
 {
-  "codeOne": "java",
-  "codeTwo": "kotlin"
+  "groupedcode_firstlang": "java",
+  "groupedcode_secondlang": "kotlin",
+  "code": "code",
+  "bubbleinfo_text": "texte d'information",
+  "textheader_anchor": "ancre",
+  "textheader_title": "titre",
+  "composer.formatting.code": "Code",
+  "composer.formatting.textheader": "Entête de texte",
+  "composer.formatting.groupedcode": "Code groupé",
+  "composer.formatting.bubbleinfo": "Bulle d'information"
 }

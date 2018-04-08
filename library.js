@@ -8,7 +8,7 @@ const langCodeRegex = /<code class="(.+)">/;
 
 const MFFCustomBB = {
     // post
-    parsePost: function (data, callback) {
+    parsePost: function(data, callback) {
         if (data && data.postData && data.postData.content) {
             data.postData.content = applyMFFCustomBB(data.postData.content);
             data.postData.content = applyGroupCode(data.postData.content, data.postData.pid)
@@ -16,30 +16,33 @@ const MFFCustomBB = {
         callback(null, data);
     },
     // user signature
-    parseSignature: function (data, callback) {
+    parseSignature: function(data, callback) {
         if (data && data.userData && data.userData.signature) {
             data.userData.signature = applyMFFCustomBB(data.userData.signature);
         }
         callback(null, data);
     },
     // user description
-    parseAboutMe: function (data, callback) {
+    parseAboutMe: function(data, callback) {
         if (data) {
             data = applyMFFCustomBB(data);
         }
         callback(null, data);
     },
     // direct preview in editor
-    parseRaw: function (data, callback) {
+    parseRaw: function(data, callback) {
         if (data) {
             data = applyMFFCustomBB(data);
             data = applyGroupCode(data, "")
         }
         callback(null, data);
     },
-    registerFormating: (payload, callback) => {
+    registerFormating: function(payload, callback) {
         const formating = [
-            {name: "grouped_code", className: "fa fa-code", title: "[[modules:composer.formatting.grouped_code]]"}
+            {name: "code", className: "fa fa-code", title: "[[mffcustombb:composer.formatting.code]]"},
+            {name: "textheader", className: "fa fa-header", title: "[[mffcustombb:composer.formatting.textheader]]"},
+            {name: "groupedcode", className: "fa fa-file-code-o", title: "[[mffcustombb:composer.formatting.groupedcode]]"},
+            {name: "bubbleinfo", className: "fa fa-info-circle", title: "[[mffcustombb:composer.formatting.bubbleinfo]]"}
         ];
 
         payload.options = payload.options.concat(formating);
@@ -72,7 +75,7 @@ function applyMFFCustomBB(textContent) {
     return textContent;
 }
 
-applyGroupCode = (textContent, id) => {
+function applyGroupCode(textContent, id) {
     if (textContent.match(codeTabRegex)) {
         let codeArray = codeTabRegex.exec(textContent);
         codeArray = codeArray[1].split(/<\/pre>\n<pre>/g);
