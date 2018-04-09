@@ -46,11 +46,7 @@ $(document).ready(function() {
                     formatting.addButtonDispatch('groupedcode', function(textarea, selectionStart, selectionEnd) {
                         if (selectionStart === selectionEnd) {
                             controls.insertIntoTextarea(textarea, '===group\n```' + strings.groupedcode_firstlang + "\n```\n```" + strings.groupedcode_secondlang + '\n```\n===');
-                            //controls.updateTextareaSelection(textarea, selectionStart + strings.link_text.length + 3, selectionEnd + strings.link_text.length + strings.link_url.length + 3);
-                        } /*else {
-                            var wrapDelta = controls.wrapSelectionInTextareaWith(textarea, '[', '](' + strings.link_url + ')');
-                            controls.updateTextareaSelection(textarea, selectionEnd + 3 - wrapDelta[1], selectionEnd + strings.link_url.length + 3 - wrapDelta[1]);
-                        }*/
+                        }
                     });
 
                     formatting.addButtonDispatch('bubbleinfo', function(textarea, selectionStart, selectionEnd) {
