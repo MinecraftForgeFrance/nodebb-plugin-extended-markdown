@@ -5,8 +5,10 @@
   "bubbleinfo_text": "texte d'information",
   "textheader_anchor": "ancre",
   "textheader_title": "titre",
+  "color_text": "Texte à colorer",
   "composer.formatting.code": "Code",
   "composer.formatting.textheader": "Entête de texte",
   "composer.formatting.groupedcode": "Code groupé",
-  "composer.formatting.bubbleinfo": "Bulle d'information"
+  "composer.formatting.bubbleinfo": "Bulle d'information",
+  "composer.formatting.color": "Couleur"
 }

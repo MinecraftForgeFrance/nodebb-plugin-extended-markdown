@@ -1,5 +1,7 @@
 "use strict";
 
+/* global $ */
+
 $(document).ready(function() {
     var MFFCustomBB = {};
 
@@ -28,7 +30,7 @@ $(document).ready(function() {
                             controls.updateTextareaSelection(textarea, selectionStart + 8, selectionStart + 8 + strings.code.length);
                         } else {
                             var wrapDelta = controls.wrapSelectionInTextareaWith(textarea, '```java\n', '\n```');
-                            console.log(wrapDelta)
+                            console.log(wrapDelta);
                             controls.updateTextareaSelection(textarea, selectionEnd + 8, selectionEnd + 8);
                         }
                     });
