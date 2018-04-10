@@ -10,5 +10,9 @@
   "composer.formatting.textheader": "Entête de texte",
   "composer.formatting.groupedcode": "Code groupé",
   "composer.formatting.bubbleinfo": "Bulle d'information",
-  "composer.formatting.color": "Couleur"
+  "composer.formatting.color": "Couleur",
+  "composer.formatting.left": "Aligner à gauche",
+  "composer.formatting.center": "Aligner au centre",
+  "composer.formatting.right": "Aligner à droite",
+  "composer.formatting.justify": "Justifié"
 }

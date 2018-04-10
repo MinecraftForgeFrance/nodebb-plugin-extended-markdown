@@ -10,5 +10,9 @@
   "composer.formatting.textheader": "Text header",
   "composer.formatting.groupedcode": "Grouped code",
   "composer.formatting.bubbleinfo": "Info bubble",
-  "composer.formatting.color": "Color"
+  "composer.formatting.color": "Color",
+  "composer.formatting.left": "Left align",
+  "composer.formatting.center": "Center align",
+  "composer.formatting.right": "Right align",
+  "composer.formatting.justify": "Justify"
 }

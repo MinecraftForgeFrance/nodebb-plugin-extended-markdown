@@ -8,9 +8,28 @@ const langCodeRegex = /<code class="(.+)">/;
 
 const colorRegex = /%\((#[\dA-Z]{6}|rgb\(\d{1,3}, ?\d{1,3}, ?\d{1,3}\)|[a-z]+)\)\[(.+?)]/g;
 
+const alignArrayRegex = [
+    {
+        name: "center",
+        regex: /<(h[1-6]|p)>\|:(.+?):\|<\/(?:h[1-6]|p)>/g
+    },
+    {
+        name: "left",
+        regex: /<(h[1-6]|p)>\|:(.+?)<\/(?:h[1-6]|p)>/g
+    },
+    {
+        name: "right",
+        regex: /<(h[1-6]|p)>(.+?):\|<\/(?:h[1-6]|p)>/g
+    },
+    {
+        name: "justify",
+        regex: /<(h[1-6]|p)>\|=(.+?)=\|<\/(?:h[1-6]|p)>/g
+    }
+];
+
 const MFFCustomBB = {
     // post
-    parsePost: function(data, callback) {
+    parsePost: function (data, callback) {
         if (data && data.postData && data.postData.content) {
             data.postData.content = applyMFFCustomBB(data.postData.content);
             data.postData.content = applyGroupCode(data.postData.content, data.postData.pid)
@@ -18,34 +37,46 @@ const MFFCustomBB = {
         callback(null, data);
     },
     // user signature
-    parseSignature: function(data, callback) {
+    parseSignature: function (data, callback) {
         if (data && data.userData && data.userData.signature) {
             data.userData.signature = applyMFFCustomBB(data.userData.signature);
         }
         callback(null, data);
     },
     // user description
-    parseAboutMe: function(data, callback) {
+    parseAboutMe: function (data, callback) {
         if (data) {
             data = applyMFFCustomBB(data);
         }
         callback(null, data);
     },
     // direct preview in editor
-    parseRaw: function(data, callback) {
+    parseRaw: function (data, callback) {
         if (data) {
             data = applyMFFCustomBB(data);
             data = applyGroupCode(data, "")
         }
         callback(null, data);
     },
-    registerFormating: function(payload, callback) {
+    registerFormating: function (payload, callback) {
         const formating = [
             {name: "code", className: "fa fa-code", title: "[[mffcustombb:composer.formatting.code]]"},
             {name: "textheader", className: "fa fa-header", title: "[[mffcustombb:composer.formatting.textheader]]"},
-            {name: "groupedcode", className: "fa fa-file-code-o", title: "[[mffcustombb:composer.formatting.groupedcode]]"},
-            {name: "bubbleinfo", className: "fa fa-info-circle", title: "[[mffcustombb:composer.formatting.bubbleinfo]]"},
-            {name: "color", className: "fa fa-eyedropper", title: "[[mffcustombb:composer.formatting.color]]"}
+            {
+                name: "groupedcode",
+                className: "fa fa-file-code-o",
+                title: "[[mffcustombb:composer.formatting.groupedcode]]"
+            },
+            {
+                name: "bubbleinfo",
+                className: "fa fa-info-circle",
+                title: "[[mffcustombb:composer.formatting.bubbleinfo]]"
+            },
+            {name: "color", className: "fa fa-eyedropper", title: "[[mffcustombb:composer.formatting.color]]"},
+            {name: "left", className: "fa fa-align-left", title: "[[mffcustombb:composer.formatting.left]]"},
+            {name: "center", className: "fa fa-align-center", title: "[[mffcustombb:composer.formatting.center]]"},
+            {name: "right", className: "fa fa-align-right", title: "[[mffcustombb:composer.formatting.right]]"},
+            {name: "justify", className: "fa fa-align-justify", title: "[[mffcustombb:composer.formatting.justify]]"}
         ];
 
         payload.options = payload.options.concat(formating);
@@ -75,12 +106,21 @@ function applyMFFCustomBB(textContent) {
             }
         });
     }
-    if(textContent.match(colorRegex))
-    {
+    if (textContent.match(colorRegex)) {
         textContent = textContent.replace(colorRegex, function (match, color, text) {
             return `<span style="color: ${color};">${text}</span>`;
         });
     }
+
+    for (let i = 0; i < alignArrayRegex.length; i++) {
+        if (textContent.match(alignArrayRegex[i].regex)) {
+            textContent = textContent.replace(alignArrayRegex[i].regex, function (match, baliseName, text) {
+                return `<${baliseName} style="text-align: ${alignArrayRegex[i].name}">${text}</${baliseName}>`;
+            });
+        }
+    }
+
+
     return textContent;
 }
 
