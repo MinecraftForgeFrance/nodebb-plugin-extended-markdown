@@ -11,19 +11,19 @@ const colorRegex = /%\((#[\dA-Z]{6}|rgb\(\d{1,3}, ?\d{1,3}, ?\d{1,3}\)|[a-z]+)\)
 const alignArrayRegex = [
     {
         name: "center",
-        regex: /<(h[1-6]|p)>\|;(.+?);\|<\/(?:h[1-6]|p)>/g
+        regex: /<(h[1-6]|p)>(?:\|;)([^]*?)(?:;\|)<\/(?:h[1-6]|p)>/g
     },
     {
         name: "left",
-        regex: /<(h[1-6]|p)>\|;(.+?)<\/(?:h[1-6]|p)>/g
+        regex: /<(h[1-6]|p)>(?:\|;)([^]*?)<\/(?:h[1-6]|p)>/g
     },
     {
         name: "right",
-        regex: /<(h[1-6]|p)>(.+?);\|<\/(?:h[1-6]|p)>/g
+        regex: /<(h[1-6]|p)>([^]*?)(?:;\|)<\/(?:h[1-6]|p)>/g
     },
     {
         name: "justify",
-        regex: /<(h[1-6]|p)>\|=(.+?)=\|<\/(?:h[1-6]|p)>/g
+        regex: /<(h[1-6]|p)>(?:\|=)([^]*?)(?:=\|)<\/(?:h[1-6]|p)>/g
     }
 ];
 
@@ -119,7 +119,7 @@ function applyMFFCustomBB(textContent) {
             });
         }
     }
-    
+
     return textContent;
 }
 
