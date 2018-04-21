@@ -1,6 +1,4 @@
-const textHeaderRegex = /#([a-zA-Z]*)\((.*)\)/g;
-// small hack for compatibility with nodebb-plugin-markdown (remove <p> </p> added by it)
-const textHeaderRegexP = /<p>#([a-zA-Z]*)\((.*)\)<\/p>/g;
+const textHeaderRegex = /<p>#([a-zA-Z]*)\((.*)\)<\/p>/g;
 const tooltipRegex = /°(.*)°\((.*)\)/g;
 
 const codeTabRegex = /(?:<p>={3}group<\/p>\n)((?:<pre><code class=".+">[^]*?<\/code><\/pre>\n){2,})(?:<p>={3}<\/p>)/g;
@@ -8,24 +6,7 @@ const langCodeRegex = /<code class="(.+)">/;
 
 const colorRegex = /%\((#[\dA-Fa-f]{6}|rgb\(\d{1,3}, ?\d{1,3}, ?\d{1,3}\)|[a-z]+)\)\[(.+?)]/g;
 
-const alignArrayRegex = [
-    {
-        name: "center",
-        regex: /<(h[1-6]|p)>(?:\|\-)([^]*?)(?:\-\|)<\/(?:h[1-6]|p)>/g
-    },
-    {
-        name: "left",
-        regex: /<(h[1-6]|p)>(?:\|\-)([^]*?)<\/(?:h[1-6]|p)>/g
-    },
-    {
-        name: "right",
-        regex: /<(h[1-6]|p)>([^]*?)(?:\-\|)<\/(?:h[1-6]|p)>/g
-    },
-    {
-        name: "justify",
-        regex: /<(h[1-6]|p)>(?:\|=)([^]*?)(?:=\|)<\/(?:h[1-6]|p)>/g
-    }
-];
+const paragraphAndHeadingRegex = /<(h[1-6]|p)>([^]*?)<\/(?:h[1-6]|p)>/g;
 
 const MFFCustomBB = {
     // post
@@ -78,14 +59,9 @@ const MFFCustomBB = {
 };
 
 function applyMFFCustomBB(textContent) {
-    if (textContent.match(textHeaderRegexP)) {
-        textContent = textContent.replace(textHeaderRegexP, function (match, anchorId, text) {
-            return '<h2 class="text-header" id="' + anchorId + '">' + text + '</h2>';
-        });
-    }
     if (textContent.match(textHeaderRegex)) {
         textContent = textContent.replace(textHeaderRegex, function (match, anchorId, text) {
-            return '<h2 class="text-header" id="' + anchorId + '">' + text + '</h2>';
+            return '<h2 class="text-header"><a class="anchor-offset" name="'+anchorId+'"></a>' + text + '</h2>';
         });
     }
     if (textContent.match(tooltipRegex)) {
@@ -104,12 +80,25 @@ function applyMFFCustomBB(textContent) {
         });
     }
 
-    for (let i = 0; i < alignArrayRegex.length; i++) {
-        if (textContent.match(alignArrayRegex[i].regex)) {
-            textContent = textContent.replace(alignArrayRegex[i].regex, function (match, baliseName, text) {
-                return `<${baliseName} style="text-align: ${alignArrayRegex[i].name}">${text}</${baliseName}>`;
-            });
-        }
+    if (textContent.match(paragraphAndHeadingRegex)) {
+        textContent = textContent.replace(paragraphAndHeadingRegex, function (match, tag, text) {
+            let hasStartPattern = text.startsWith("|-");
+            let hasEndPattern = text.endsWith("-|");
+            let anchor = tag.charAt(0) == "h" ? generateAnchorFromHeading(text) : "";
+            if(text.startsWith("|=") && text.endsWith("=|")) {
+                return `<${tag} style="text-align:justify;">${anchor}${text.slice(2).slice(0, -2)}</${tag}>`;
+            }
+            else if(hasStartPattern && hasEndPattern) {
+                return `<${tag} style="text-align:center;">${anchor}${text.slice(2).slice(0, -2)}</${tag}>`;
+            }
+            else if(hasEndPattern) {
+                return `<${tag} style="text-align:right;">${anchor}${text.slice(0, -2)}</${tag}>`;
+            }
+            else if(hasStartPattern) {
+                return `<${tag} style="text-align:left;">${anchor}${text.slice(2)}</${tag}>`;
+            }
+            return `<${tag}>${anchor}${text}</${tag}>`;
+        });
     }
 
     return textContent;
@@ -147,6 +136,10 @@ function applyGroupCode(textContent, id) {
 
 function capitalizeFirstLetter(name) {
     return name.charAt(0).toUpperCase() + name.slice(1);
+}
+
+function generateAnchorFromHeading(heading) {
+    return `<a class="anchor-offset" name="${heading.toLowerCase().replace(/\s/g, "-").replace(/(<([^>]+)>)|[^\w\s\-]/ig, "")}"></a>`;
 }
 
 module.exports = MFFCustomBB;
