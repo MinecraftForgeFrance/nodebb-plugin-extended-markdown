@@ -6,7 +6,7 @@ const tooltipRegex = /°(.*)°\((.*)\)/g;
 const codeTabRegex = /(?:<p>={3}group<\/p>\n)((?:<pre><code class=".+">[^]*?<\/code><\/pre>\n){2,})(?:<p>={3}<\/p>)/g;
 const langCodeRegex = /<code class="(.+)">/;
 
-const colorRegex = /%\((#[\dA-Z]{6}|rgb\(\d{1,3}, ?\d{1,3}, ?\d{1,3}\)|[a-z]+)\)\[(.+?)]/g;
+const colorRegex = /%\((#[\dA-Fa-f]{6}|rgb\(\d{1,3}, ?\d{1,3}, ?\d{1,3}\)|[a-z]+)\)\[(.+?)]/g;
 
 const alignArrayRegex = [
     {
@@ -60,23 +60,15 @@ const MFFCustomBB = {
     },
     registerFormating: function (payload, callback) {
         const formating = [
-            {name: "code", className: "fa fa-code", title: "[[mffcustombb:composer.formatting.code]]"},
-            {name: "textheader", className: "fa fa-header", title: "[[mffcustombb:composer.formatting.textheader]]"},
-            {
-                name: "groupedcode",
-                className: "fa fa-file-code-o",
-                title: "[[mffcustombb:composer.formatting.groupedcode]]"
-            },
-            {
-                name: "bubbleinfo",
-                className: "fa fa-info-circle",
-                title: "[[mffcustombb:composer.formatting.bubbleinfo]]"
-            },
             {name: "color", className: "fa fa-eyedropper", title: "[[mffcustombb:composer.formatting.color]]"},
             {name: "left", className: "fa fa-align-left", title: "[[mffcustombb:composer.formatting.left]]"},
             {name: "center", className: "fa fa-align-center", title: "[[mffcustombb:composer.formatting.center]]"},
             {name: "right", className: "fa fa-align-right", title: "[[mffcustombb:composer.formatting.right]]"},
-            {name: "justify", className: "fa fa-align-justify", title: "[[mffcustombb:composer.formatting.justify]]"}
+            {name: "justify", className: "fa fa-align-justify", title: "[[mffcustombb:composer.formatting.justify]]"},
+            {name: "code", className: "fa fa-code", title: "[[mffcustombb:composer.formatting.code]]"},
+            {name: "textheader", className: "fa fa-header", title: "[[mffcustombb:composer.formatting.textheader]]"},
+            {name: "groupedcode", className: "fa fa-file-code-o", title: "[[mffcustombb:composer.formatting.groupedcode]]"},
+            {name: "bubbleinfo", className: "fa fa-info-circle", title: "[[mffcustombb:composer.formatting.bubbleinfo]]"}
         ];
 
         payload.options = payload.options.concat(formating);
