@@ -1,10 +1,10 @@
 const textHeaderRegex = /<p>#([a-zA-Z]*)\((.*)\)<\/p>/g;
-const tooltipRegex = /°(.*)°\((.*)\)/g;
+const tooltipRegex = /(<code.*>*?[^]<\/code>)|°(.*)°\((.*)\)/g;
 
 const codeTabRegex = /(?:<p>={3}group<\/p>\n)((?:<pre><code class=".+">[^]*?<\/code><\/pre>\n){2,})(?:<p>={3}<\/p>)/g;
 const langCodeRegex = /<code class="(.+)">/;
 
-const colorRegex = /%\((#[\dA-Fa-f]{6}|rgb\(\d{1,3}, ?\d{1,3}, ?\d{1,3}\)|[a-z]+)\)\[(.+?)]/g;
+const colorRegex = /(<code.*>*?[^]<\/code>)|%\((#[\dA-Fa-f]{6}|rgb\(\d{1,3}, ?\d{1,3}, ?\d{1,3}\)|[a-z]+)\)\[(.+?)]/g;
 
 const paragraphAndHeadingRegex = /<(h[1-6]|p)>([^]*?)<\/(?:h[1-6]|p)>/g;
 
@@ -59,14 +59,18 @@ const MFFCustomBB = {
 };
 
 function applyMFFCustomBB(textContent) {
+    console.log(textContent);
     if (textContent.match(textHeaderRegex)) {
         textContent = textContent.replace(textHeaderRegex, function (match, anchorId, text) {
             return '<h2 class="text-header"><a class="anchor-offset" name="'+anchorId+'"></a>' + text + '</h2>';
         });
     }
     if (textContent.match(tooltipRegex)) {
-        textContent = textContent.replace(tooltipRegex, function (match, text, tooltipText) {
-            if ("fa-info" === text) {
+        textContent = textContent.replace(tooltipRegex, function (match, code, text, tooltipText) {
+            if(typeof(code) !== "undefined") {
+                return code;
+            }
+            else if ("fa-info" === text) {
                 return '<i class="fa fa-info-circle mff-tooltip" data-toggle="tooltip" title="' + tooltipText + '"></i>';
             }
             else {
@@ -75,7 +79,10 @@ function applyMFFCustomBB(textContent) {
         });
     }
     if (textContent.match(colorRegex)) {
-        textContent = textContent.replace(colorRegex, function (match, color, text) {
+        textContent = textContent.replace(colorRegex, function (match, code, color, text) {
+            if(typeof(code) !== "undefined") {
+                return code;
+            }
             return `<span style="color: ${color};">${text}</span>`;
         });
     }
