@@ -59,7 +59,6 @@ const MFFCustomBB = {
 };
 
 function applyMFFCustomBB(textContent) {
-    console.log(textContent);
     if (textContent.match(textHeaderRegex)) {
         textContent = textContent.replace(textHeaderRegex, function (match, anchorId, text) {
             return '<h2 class="text-header"><a class="anchor-offset" name="'+anchorId+'"></a>' + text + '</h2>';

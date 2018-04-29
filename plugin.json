@@ -1,6 +1,6 @@
 {
-    "id": "nodebb-plugin-mff-custombb",
-    "url": "https://github.com/MinecraftForgeFrance/nodebb-plugin-mff-custombb",
+    "id": "nodebb-plugin-extended-markdown",
+    "url": "https://github.com/MinecraftForgeFrance/nodebb-plugin-extended-markdown",
     "library": "./library.js",
     "staticDirs": {
         "images": "static/images"
