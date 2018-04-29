@@ -8,11 +8,11 @@ const colorRegex = /(<code.*>*?[^]<\/code>)|%\((#[\dA-Fa-f]{6}|rgb\(\d{1,3}, ?\d
 
 const paragraphAndHeadingRegex = /<(h[1-6]|p)>([^]*?)<\/(?:h[1-6]|p)>/g;
 
-const MFFCustomBB = {
+const ExtendedMarkdown = {
     // post
     parsePost: function (data, callback) {
         if (data && data.postData && data.postData.content) {
-            data.postData.content = applyMFFCustomBB(data.postData.content);
+            data.postData.content = applyExtendedMarkdown(data.postData.content);
             data.postData.content = applyGroupCode(data.postData.content, data.postData.pid)
         }
         callback(null, data);
@@ -20,36 +20,36 @@ const MFFCustomBB = {
     // user signature
     parseSignature: function (data, callback) {
         if (data && data.userData && data.userData.signature) {
-            data.userData.signature = applyMFFCustomBB(data.userData.signature);
+            data.userData.signature = applyExtendedMarkdown(data.userData.signature);
         }
         callback(null, data);
     },
     // user description
     parseAboutMe: function (data, callback) {
         if (data) {
-            data = applyMFFCustomBB(data);
+            data = applyExtendedMarkdown(data);
         }
         callback(null, data);
     },
     // direct preview in editor
     parseRaw: function (data, callback) {
         if (data) {
-            data = applyMFFCustomBB(data);
+            data = applyExtendedMarkdown(data);
             data = applyGroupCode(data, "")
         }
         callback(null, data);
     },
     registerFormating: function (payload, callback) {
         const formating = [
-            {name: "color", className: "fa fa-eyedropper", title: "[[mffcustombb:composer.formatting.color]]"},
-            {name: "left", className: "fa fa-align-left", title: "[[mffcustombb:composer.formatting.left]]"},
-            {name: "center", className: "fa fa-align-center", title: "[[mffcustombb:composer.formatting.center]]"},
-            {name: "right", className: "fa fa-align-right", title: "[[mffcustombb:composer.formatting.right]]"},
-            {name: "justify", className: "fa fa-align-justify", title: "[[mffcustombb:composer.formatting.justify]]"},
-            {name: "code", className: "fa fa-code", title: "[[mffcustombb:composer.formatting.code]]"},
-            {name: "textheader", className: "fa fa-header", title: "[[mffcustombb:composer.formatting.textheader]]"},
-            {name: "groupedcode", className: "fa fa-file-code-o", title: "[[mffcustombb:composer.formatting.groupedcode]]"},
-            {name: "bubbleinfo", className: "fa fa-info-circle", title: "[[mffcustombb:composer.formatting.bubbleinfo]]"}
+            {name: "color", className: "fa fa-eyedropper", title: "[[extendedmarkdown:composer.formatting.color]]"},
+            {name: "left", className: "fa fa-align-left", title: "[[extendedmarkdown:composer.formatting.left]]"},
+            {name: "center", className: "fa fa-align-center", title: "[[extendedmarkdown:composer.formatting.center]]"},
+            {name: "right", className: "fa fa-align-right", title: "[[extendedmarkdown:composer.formatting.right]]"},
+            {name: "justify", className: "fa fa-align-justify", title: "[[extendedmarkdown:composer.formatting.justify]]"},
+            {name: "code", className: "fa fa-code", title: "[[extendedmarkdown:composer.formatting.code]]"},
+            {name: "textheader", className: "fa fa-header", title: "[[extendedmarkdown:composer.formatting.textheader]]"},
+            {name: "groupedcode", className: "fa fa-file-code-o", title: "[[extendedmarkdown:composer.formatting.groupedcode]]"},
+            {name: "bubbleinfo", className: "fa fa-info-circle", title: "[[extendedmarkdown:composer.formatting.bubbleinfo]]"}
         ];
 
         payload.options = payload.options.concat(formating);
@@ -58,7 +58,7 @@ const MFFCustomBB = {
     }
 };
 
-function applyMFFCustomBB(textContent) {
+function applyExtendedMarkdown(textContent) {
     if (textContent.match(textHeaderRegex)) {
         textContent = textContent.replace(textHeaderRegex, function (match, anchorId, text) {
             return '<h2 class="text-header"><a class="anchor-offset" name="'+anchorId+'"></a>' + text + '</h2>';
@@ -70,10 +70,10 @@ function applyMFFCustomBB(textContent) {
                 return code;
             }
             else if ("fa-info" === text) {
-                return '<i class="fa fa-info-circle mff-tooltip" data-toggle="tooltip" title="' + tooltipText + '"></i>';
+                return '<i class="fa fa-info-circle extended-markdown-tooltip" data-toggle="tooltip" title="' + tooltipText + '"></i>';
             }
             else {
-                return '<span class="mff-tooltip" data-toggle="tooltip" title="' + tooltipText + '">' + text + '</span>';
+                return '<span class="extended-markdown-tooltip" data-toggle="tooltip" title="' + tooltipText + '">' + text + '</span>';
             }
         });
     }
@@ -148,4 +148,4 @@ function generateAnchorFromHeading(heading) {
     return `<a class="anchor-offset" name="${heading.toLowerCase().replace(/\s/g, "-").replace(/(<([^>]+)>)|[^\w\s\-]/ig, "")}"></a>`;
 }
 
-module.exports = MFFCustomBB;
+module.exports = ExtendedMarkdown;

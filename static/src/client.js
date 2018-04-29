@@ -3,7 +3,7 @@
 /* global $ */
 
 $(document).ready(function() {
-    var MFFCustomBB = {};
+    var ExtendedMarkdown = {};
 
     $('[data-toggle="tooltip"]').tooltip();
 
@@ -12,10 +12,10 @@ $(document).ready(function() {
     });
 
     $(window).on('action:composer.enhanced', function(evt, data) {
-        MFFCustomBB.prepareFormattingTools();
+        ExtendedMarkdown.prepareFormattingTools();
     });
 
-    MFFCustomBB.prepareFormattingTools = function() {
+    ExtendedMarkdown.prepareFormattingTools = function() {
         require([
             'composer/formatting',
             'composer/controls',
@@ -24,7 +24,7 @@ $(document).ready(function() {
         ], function (formatting, controls, translator) {
             if (formatting && controls) {
                 // params is (language, namespace, callback)
-                translator.getTranslations(window.config.userLang || window.config.defaultLang, 'mffcustombb', function(strings) {
+                translator.getTranslations(window.config.userLang || window.config.defaultLang, 'extendedmarkdown', function(strings) {
                     var composerTextarea;
                     $('li[data-format="color"]').ColorPicker({
                         eventName: 'showPicker',

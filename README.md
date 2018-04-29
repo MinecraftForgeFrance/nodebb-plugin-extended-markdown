@@ -20,7 +20,7 @@ Combining the two will center the text.
 ![Align](demo/align.png?raw=true)
 You can also justify your paragraph by adding `|=` at the begin and `=|` at the end.
 
-/!\ Warning, text align is apply on the whole paragraph, so this will not work:
+/!\ Warning, text align is applied on the whole paragraph, so this will not work:
 ```
 |-This text won't be centered because the ending tag is at the end of the line instead of the end of the paragraph.-|
 This is still the same paragraph! You need to add two new lines to start a new paragraph
