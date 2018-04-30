@@ -21,7 +21,7 @@ Combining the two will center the text.
 You can also justify your paragraph by adding `|=` at the begin and `=|` at the end.
 
 /!\ Warning, text align is applied on the whole paragraph, so this will not work:
-```
+``` 
 |-This text won't be centered because the ending tag is at the end of the line instead of the end of the paragraph.-|
 This is still the same paragraph! You need to add two new lines to start a new paragraph
 ```
@@ -33,10 +33,10 @@ Tooltip allow you to add an overtext on another text. The syntax is `°text°(to
 
 ### Anchor
 All heading (h1, h2, etc., `#` in markdown) will automatically have an anchor of the same name except that the spaces will be replaced by dashes and all non alphanumeric chars will be remove.
-You can then create a link to this anchor with the usual markdown syntax: `[link name](#anchor name)`
+You can then create a link to this anchor with the usual markdown syntax: `[link name](#anchor-name)`
 
 ### Text heading with background
-Specially added for Minecraft Forge France's tutorials, this one is a h2 with a background. You can add it with `#anchor(title)`.
+Specially added for Minecraft Forge France's tutorials, this one is a h2 with a background. You can add it with `#anchor-name(title)` where anchor-name is the name of the anchor. You can then create a link to this anchor with the usual markdown syntax: `[link name](#anchor-name)`
 
 ![Heading with background](demo/heading.png?raw=true)
 

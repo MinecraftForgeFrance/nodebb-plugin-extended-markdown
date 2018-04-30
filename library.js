@@ -1,4 +1,4 @@
-const textHeaderRegex = /<p>#([a-zA-Z-]*)\((.*)\)<\/p>/g;
+const textHeaderRegex = /<p>#([a-zA-Z0-9-]*)\((.*)\)<\/p>/g;
 const tooltipRegex = /(<code.*>*?[^]<\/code>)|°(.*)°\((.*)\)/g;
 
 const codeTabRegex = /(?:<p>={3}group<\/p>\n)((?:<pre><code class=".+">[^]*?<\/code><\/pre>\n){2,})(?:<p>={3}<\/p>)/g;
