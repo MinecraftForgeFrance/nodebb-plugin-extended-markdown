@@ -2,9 +2,6 @@
     "id": "nodebb-plugin-extended-markdown",
     "url": "https://github.com/MinecraftForgeFrance/nodebb-plugin-extended-markdown",
     "library": "./library.js",
-    "staticDirs": {
-        "images": "static/images"
-    },
     "less": [
         "static/style.less"
     ],
@@ -17,9 +14,6 @@
     ],
     "scripts": [
         "static/src/client.js"
-    ],
-    "acpScripts": [
-        "static/src/admin.js"
     ],
     "languages": "languages"
 }
