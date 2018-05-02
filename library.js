@@ -7,7 +7,7 @@ const langCodeRegex = /<code class="(.+)">/;
 const colorRegex = /(<code.*>*?[^]<\/code>)|%\((#[\dA-Fa-f]{6}|rgb\(\d{1,3}, ?\d{1,3}, ?\d{1,3}\)|[a-z]+)\)\[(.+?)]/g;
 
 const paragraphAndHeadingRegex = /<(h[1-6]|p)>([^]*?)<\/(?:h[1-6]|p)>/g;
-const noteRegex = /<p>!!! (note|warning|attention|important): (.*)<\/p>/g;
+const noteRegex = /<p>!!! (note|warning|attention|important): ((.|<br \/>\n)*)<\/p>/g;
 
 const noteIcons = {
     note: 'fa-info-circle',
