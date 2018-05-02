@@ -7,6 +7,14 @@ const langCodeRegex = /<code class="(.+)">/;
 const colorRegex = /(<code.*>*?[^]<\/code>)|%\((#[\dA-Fa-f]{6}|rgb\(\d{1,3}, ?\d{1,3}, ?\d{1,3}\)|[a-z]+)\)\[(.+?)]/g;
 
 const paragraphAndHeadingRegex = /<(h[1-6]|p)>([^]*?)<\/(?:h[1-6]|p)>/g;
+const noteRegex = /<p>!!! (note|warning|attention|important): (.*)<\/p>/g;
+
+const noteIcons = {
+    note: 'fa-info-circle',
+    warning: 'fa-exclamation-triangle',
+    attention: 'fa-exclamation-triangle',
+    important: 'fa-exclamation-circle'
+};
 
 const ExtendedMarkdown = {
     // post
@@ -59,6 +67,18 @@ const ExtendedMarkdown = {
 };
 
 function applyExtendedMarkdown(textContent) {
+    if (textContent.match(noteRegex)) {
+        textContent = textContent.replace(noteRegex, function (match, type, text) {
+            return `<div class="admonition `+type.toLowerCase()+`"><p class="admonition-title"><i class="fa `+noteIcons[type.toLowerCase()]+`"></i>`+type.charAt(0).toUpperCase() + type.slice(1)+`</p><p>`+text+`</p></div>`;
+        });
+    }
+
+    if (textContent.match(noteRegex)) {
+        textContent = textContent.replace(noteRegex, function (match, type, text) {
+            return `<div class="admonition `+type.toLowerCase()+`"><p class="admonition-title">`+type+`</p><p>`+text+`</p></div>`;
+        });
+    }
+
     if (textContent.match(textHeaderRegex)) {
         textContent = textContent.replace(textHeaderRegex, function (match, anchorId, text) {
             return '<h2 class="text-header"><a class="anchor-offset" name="'+anchorId+'"></a>' + text + '</h2>';
