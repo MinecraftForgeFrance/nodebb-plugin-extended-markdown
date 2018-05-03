@@ -73,12 +73,6 @@ function applyExtendedMarkdown(textContent) {
         });
     }
 
-    if (textContent.match(noteRegex)) {
-        textContent = textContent.replace(noteRegex, function (match, type, text) {
-            return `<div class="admonition `+type.toLowerCase()+`"><p class="admonition-title">`+type+`</p><p>`+text+`</p></div>`;
-        });
-    }
-
     if (textContent.match(textHeaderRegex)) {
         textContent = textContent.replace(textHeaderRegex, function (match, anchorId, text) {
             return '<h2 class="text-header"><a class="anchor-offset" name="'+anchorId+'"></a>' + text + '</h2>';
