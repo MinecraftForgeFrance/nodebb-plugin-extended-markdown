@@ -65,3 +65,43 @@ And the result:
 ![Grouped code](demo/groupedcode.gif?raw=true)
 
 You can add more than two languages.
+
+### Note
+
+Enable to emphasise some element with a nice design 
+```
+!!! note: A simple note
+
+!!! important: An important note
+
+!!! attention: a warning note
+
+!!! warning: a warning note
+```
+
+And the result;
+
+![Note](demo/note.png)
+
+You can change the colors by override the css:
+```css
+.admonition.important { 
+    background: #c0f2e8;
+}
+.admonition.important .admonition-title {
+    background: #7de8d2;
+}
+.admonition.note { 
+    background: #c0dcf2;
+}
+.admonition.note .admonition-title { 
+    background: #7dbae8;
+}
+.admonition.attention, .admonition.warning { 
+    background:#f2d9c0;
+}
+.admonition.attention .admonition-title, .admonition.warning .admonition-title {
+    background:#e8b37d;
+}
+```
+in you nodebb custom css (admin/appearance/customise).
