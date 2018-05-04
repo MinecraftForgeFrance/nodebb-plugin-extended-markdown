@@ -74,9 +74,8 @@ Enable to emphasise some element with a nice design
 
 !!! important: An important note
 
-!!! attention: a warning note
-
-!!! warning: a warning note
+!!! warning: A warning note
+Can be in multiple line !
 ```
 
 And the result;
