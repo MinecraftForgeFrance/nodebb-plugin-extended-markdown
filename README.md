@@ -90,16 +90,16 @@ You can change the colors by override the css:
 .admonition.important .admonition-title {
     background: #7de8d2;
 }
-.admonition.note { 
+.admonition.info { 
     background: #c0dcf2;
 }
-.admonition.note .admonition-title { 
+.admonition.info .admonition-title { 
     background: #7dbae8;
 }
-.admonition.attention, .admonition.warning { 
+.admonition.warning { 
     background:#f2d9c0;
 }
-.admonition.attention .admonition-title, .admonition.warning .admonition-title {
+.admonition.warning .admonition-title {
     background:#e8b37d;
 }
 ```
