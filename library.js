@@ -1,5 +1,7 @@
 'use strict';
 
+const utils = module.parent.require('./utils');
+
 const textHeaderRegex = /<p>#([a-zA-Z0-9-]*)\((.*)\)<\/p>/g;
 const tooltipRegex = /(<code.*>*?[^]<\/code>)|°(.*)°\((.*)\)/g;
 
@@ -9,7 +11,7 @@ const langCodeRegex = /<code class="(.+)">/;
 const colorRegex = /(<code.*>*?[^]<\/code>)|%\((#[\dA-Fa-f]{6}|rgb\(\d{1,3}, ?\d{1,3}, ?\d{1,3}\)|[a-z]+)\)\[(.+?)]/g;
 
 const paragraphAndHeadingRegex = /<(h[1-6]|p)>([^]*?)<\/(?:h[1-6]|p)>/g;
-const noteRegex = /<p>!!! (info|warning|important): ((.|<br \/>\n)*)<\/p>/g;
+const noteRegex = /<p>!!! (info|warning|important) \[([a-zA-Z0-9]*)\]: ((.|<br \/>\n)*)<\/p>/g;
 
 const noteIcons = {
     info: 'fa-info-circle',
@@ -69,8 +71,8 @@ const ExtendedMarkdown = {
 
 function applyExtendedMarkdown(textContent) {
     if (textContent.match(noteRegex)) {
-        textContent = textContent.replace(noteRegex, function (match, type, text) {
-            return `<div class="admonition ${type.toLowerCase()}"><p class="admonition-title"><i class="fa ${noteIcons[type.toLowerCase()]}"></i>${capitalizeFirstLetter(type)}</p><p>${text}</p></div>`;
+        textContent = textContent.replace(noteRegex, function (match, type, title, text) {
+            return `<div class="admonition ${type.toLowerCase()}"><p class="admonition-title"><i class="fa ${noteIcons[type.toLowerCase()]}"></i>${title}</p><p>${text}</p></div>`;
         });
     }
 
@@ -162,7 +164,7 @@ function capitalizeFirstLetter(name) {
 }
 
 function generateAnchorFromHeading(heading) {
-    return `<a class="anchor-offset" name="${heading.toLowerCase().replace(/\s/g, "-").replace(/(<([^>]+)>)|[^\w\s\-]/ig, "")}"></a>`;
+    return `<a class="anchor-offset" name="${utils.slugify(heading)}"></a>`;
 }
 
 module.exports = ExtendedMarkdown;
