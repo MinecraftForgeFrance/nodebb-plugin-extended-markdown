@@ -32,7 +32,7 @@ Tooltip allow you to add an overtext on another text. The syntax is `°text°(to
 ![Tooltip](demo/tooltip.png?raw=true)
 
 ### Anchor
-All heading (h1, h2, etc., `#` in markdown) will automatically have an anchor of the same name except that the spaces will be replaced by dashes and all non alphanumeric chars will be remove.
+All heading (h1, h2, etc., `#` in markdown) will automatically have an anchor of named using a slug (specials chars like `:`, `,` are removed, space are remplaced by a `-`).
 You can then create a link to this anchor with the usual markdown syntax: `[link name](#anchor-name)`
 
 ### Text heading with background
@@ -70,11 +70,11 @@ You can add more than two languages.
 
 Enable to emphasise some element with a nice design 
 ```
-!!! note: A simple note
+!!! info [Title]: A simple note
 
-!!! important: An important note
+!!! important [Title]: An important note
 
-!!! warning: A warning note
+!!! warning [Title]: A warning note
 Can be in multiple line !
 ```
 
