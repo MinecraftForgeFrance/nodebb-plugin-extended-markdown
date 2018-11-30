@@ -1,6 +1,6 @@
 'use strict';
 
-const utils = module.parent.require('./utils');
+const utils = require.main.require('./src/utils');
 
 const textHeaderRegex = /<p>#([a-zA-Z0-9-]*)\((.*)\)<\/p>/g;
 const tooltipRegex = /(<code.*>*?[^]<\/code>)|°(.*)°\((.*)\)/g;
