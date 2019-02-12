@@ -13,6 +13,8 @@ const colorRegex = /(<code.*>*?[^]<\/code>)|%\((#[\dA-Fa-f]{6}|rgb\(\d{1,3}, ?\d
 const paragraphAndHeadingRegex = /<(h[1-6]|p)>([^]*?)<\/(?:h[1-6]|p)>/g;
 const noteRegex = /<p>!!! (info|warning|important) \[([a-zA-Z0-9]*)\]: ((.|<br \/>\n)*)<\/p>/g;
 
+const spoilerRegex = /(?:<p>)(?:\|\|)([^]*?)(?:\|\|)(?:<\/p>)/g;
+
 const noteIcons = {
     info: 'fa-info-circle',
     warning: 'fa-exclamation-triangle',
@@ -24,7 +26,8 @@ const ExtendedMarkdown = {
     parsePost(data, callback) {
         if (data && data.postData && data.postData.content) {
             data.postData.content = applyExtendedMarkdown(data.postData.content);
-            data.postData.content = applyGroupCode(data.postData.content, data.postData.pid)
+            data.postData.content = applyGroupCode(data.postData.content, data.postData.pid);
+            data.postData.content = applySpoiler(data.postData.content);
         }
         callback(null, data);
     },
@@ -46,7 +49,8 @@ const ExtendedMarkdown = {
     parseRaw(data, callback) {
         if (data) {
             data = applyExtendedMarkdown(data);
-            data = applyGroupCode(data, "")
+            data = applyGroupCode(data, "");
+            data = applySpoiler(data);
         }
         callback(null, data);
     },
@@ -61,6 +65,7 @@ const ExtendedMarkdown = {
             {name: "textheader", className: "fa fa-header", title: "[[extendedmarkdown:composer.formatting.textheader]]"},
             {name: "groupedcode", className: "fa fa-file-code-o", title: "[[extendedmarkdown:composer.formatting.groupedcode]]"},
             {name: "bubbleinfo", className: "fa fa-info-circle", title: "[[extendedmarkdown:composer.formatting.bubbleinfo]]"}
+            {name: "spoiler", className: "fa fa-file", title: "[[extendedmarkdown:composer.formatting.spoiler]]"}
         ];
 
         payload.options = payload.options.concat(formating);
@@ -84,13 +89,11 @@ function applyExtendedMarkdown(textContent) {
 
     if (textContent.match(tooltipRegex)) {
         textContent = textContent.replace(tooltipRegex, function (match, code, text, tooltipText) {
-            if(typeof(code) !== "undefined") {
+            if (typeof (code) !== "undefined") {
                 return code;
-            }
-            else if ("fa-info" === text) {
+            } else if ("fa-info" === text) {
                 return `<i class="fa fa-info-circle extended-markdown-tooltip" data-toggle="tooltip" title="${tooltipText}"></i>`;
-            }
-            else {
+            } else {
                 return `<span class="extended-markdown-tooltip" data-toggle="tooltip" title="${tooltipText}">${text}</span>`;
             }
         });
@@ -98,7 +101,7 @@ function applyExtendedMarkdown(textContent) {
 
     if (textContent.match(colorRegex)) {
         textContent = textContent.replace(colorRegex, function (match, code, color, text) {
-            if(typeof(code) !== "undefined") {
+            if (typeof (code) !== "undefined") {
                 return code;
             }
             return `<span style="color: ${color};">${text}</span>`;
@@ -110,16 +113,13 @@ function applyExtendedMarkdown(textContent) {
             let hasStartPattern = text.startsWith("|-");
             let hasEndPattern = text.endsWith("-|");
             let anchor = tag.charAt(0) == "h" ? generateAnchorFromHeading(text) : "";
-            if(text.startsWith("|=") && text.endsWith("=|")) {
+            if (text.startsWith("|=") && text.endsWith("=|")) {
                 return `<${tag} style="text-align:justify;">${anchor}${text.slice(2).slice(0, -2)}</${tag}>`;
-            }
-            else if(hasStartPattern && hasEndPattern) {
+            } else if (hasStartPattern && hasEndPattern) {
                 return `<${tag} style="text-align:center;">${anchor}${text.slice(2).slice(0, -2)}</${tag}>`;
-            }
-            else if(hasEndPattern) {
+            } else if (hasEndPattern) {
                 return `<${tag} style="text-align:right;">${anchor}${text.slice(0, -2)}</${tag}>`;
-            }
-            else if(hasStartPattern) {
+            } else if (hasStartPattern) {
                 return `<${tag} style="text-align:left;">${anchor}${text.slice(2)}</${tag}>`;
             }
             return `<${tag}>${anchor}${text}</${tag}>`;
@@ -165,6 +165,17 @@ function capitalizeFirstLetter(name) {
 
 function generateAnchorFromHeading(heading) {
     return `<a class="anchor-offset" name="${utils.slugify(heading)}"></a>`;
+}
+
+function applySpoiler(textContent) {
+    if (textContent.match(spoilerRegex)) {
+        textContent = textContent.replace(spoilerRegex, (match, text) => {
+            const spoilerButton = "<label>Spoiler</label><button name='spoiler' type='button'>[+]</button>";
+            const spoilerContent = "<div class='spoiler'>" + text + "</div>";
+            return spoilerButton + spoilerContent;
+        });
+    }
+    return textContent;
 }
 
 module.exports = ExtendedMarkdown;

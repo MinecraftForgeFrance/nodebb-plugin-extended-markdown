@@ -18,5 +18,6 @@
     "composer.formatting.left": "Aligner à gauche",
     "composer.formatting.center": "Aligner au centre",
     "composer.formatting.right": "Aligner à droite",
-    "composer.formatting.justify": "Justifié"
+    "composer.formatting.justify": "Justifié",
+    "composer.formatting.spoiler": "Spoiler"
 }
