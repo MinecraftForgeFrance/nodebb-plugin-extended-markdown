@@ -64,7 +64,7 @@ const ExtendedMarkdown = {
             {name: "code", className: "fa fa-code", title: "[[extendedmarkdown:composer.formatting.code]]"},
             {name: "textheader", className: "fa fa-header", title: "[[extendedmarkdown:composer.formatting.textheader]]"},
             {name: "groupedcode", className: "fa fa-file-code-o", title: "[[extendedmarkdown:composer.formatting.groupedcode]]"},
-            {name: "bubbleinfo", className: "fa fa-info-circle", title: "[[extendedmarkdown:composer.formatting.bubbleinfo]]"}
+            {name: "bubbleinfo", className: "fa fa-info-circle", title: "[[extendedmarkdown:composer.formatting.bubbleinfo]]"},
             {name: "spoiler", className: "fa fa-file", title: "[[extendedmarkdown:composer.formatting.spoiler]]"}
         ];
 
