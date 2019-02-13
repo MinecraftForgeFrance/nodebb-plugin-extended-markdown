@@ -150,14 +150,17 @@ $(document).ready(function () {
         });
     };
 
-    $(":button[name=spoiler]").on("click", function () {
-        var state = false;
-        if (state) {
-            $(this).innerText = "[-]";
-            $(this).nextSibling.style.display = "block";
-        } else {
-            $(this).innerText = "[+]";
-            $(this).nextSibling.style.display = "none";
-        }
+    document.querySelectorAll('button[type=button][name=spoiler]').forEach(function(element) {
+        element.onclick = function() {
+            if(!element.classList.contains("sp-open")) {
+                element.textContent = "[-]";
+                element.nextSibling.style.display = "block";
+                element.classList.add('sp-open');
+            } else {
+                element.textContent = "[+]";
+                element.nextSibling.style.display = "none";
+                element.classList.remove('sp-open');
+            }
+        };
     });
 });

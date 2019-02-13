@@ -171,7 +171,7 @@ function applySpoiler(textContent) {
     if (textContent.match(spoilerRegex)) {
         textContent = textContent.replace(spoilerRegex, (match, text) => {
             const spoilerButton = "<label>Spoiler</label><button name='spoiler' type='button'>[+]</button>";
-            const spoilerContent = "<div class='spoiler'>" + text + "</div>";
+            const spoilerContent = `<div class='spoiler'>${text}</div>`;
             return spoilerButton + spoilerContent;
         });
     }
