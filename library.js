@@ -131,19 +131,15 @@ function applyExtendedMarkdown(textContent) {
 
 function applyGroupCode(textContent, id) {
     if (textContent.match(codeTabRegex)) {
-        let codeArray = codeTabRegex.exec(textContent);
-        codeArray = codeArray[1].split(/<\/pre>\n<pre>/g);
-        let lang = [];
-        lang[0] = langCodeRegex.exec(codeArray[0])[1];
-        codeArray[0] += "</pre>\n";
-        for (let i = 1; i < codeArray.length - 1; i++) {
-            lang[i] = langCodeRegex.exec(codeArray[i])[1];
-            codeArray[i] = "<pre>" + codeArray[i] + "</pre>\n";
-        }
-        codeArray[codeArray.length - 1] = "<pre>" + codeArray[codeArray.length - 1];
-        lang[codeArray.length - 1] = langCodeRegex.exec(codeArray[codeArray.length - 1])[1];
         let count = 0;
-        textContent = textContent.replace(codeTabRegex, () => {
+        textContent = textContent.replace(codeTabRegex, (match, codes) => {
+            // code is the first match, the full grouped code without the start ===group and the end ===
+            let codeArray = codes.substring(5, codes.length - 6).split(/<\/pre>\n<pre>/g); // remove first and last <pre> then split between all lang
+            let lang = [];
+            for (let i in codeArray) {
+                lang[i] = langCodeRegex.exec(codeArray[i])[1]; // extact lang for code
+                codeArray[i] = "<pre>" + codeArray[i] + "</pre>\n"; // add pre at the start and at the end of all code
+            }
             let menuTab = "<ul class='nav nav-tabs' role='tablist'>";
             let contentTab = "<div class='tab-content'>";
             for (let i = 0; i < lang.length; i++) {
