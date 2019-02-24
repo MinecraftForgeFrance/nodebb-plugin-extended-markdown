@@ -54,8 +54,8 @@ const ExtendedMarkdown = {
         }
         callback(null, data);
     },
-    registerFormating(payload, callback) {
-        const formating = [
+    registerFormatting(payload, callback) {
+        const formatting = [
             {name: "color", className: "fa fa-eyedropper", title: "[[extendedmarkdown:composer.formatting.color]]"},
             {name: "left", className: "fa fa-align-left", title: "[[extendedmarkdown:composer.formatting.left]]"},
             {name: "center", className: "fa fa-align-center", title: "[[extendedmarkdown:composer.formatting.center]]"},
@@ -68,7 +68,7 @@ const ExtendedMarkdown = {
             {name: "spoiler", className: "fa fa-file", title: "[[extendedmarkdown:composer.formatting.spoiler]]"}
         ];
 
-        payload.options = payload.options.concat(formating);
+        payload.options = payload.options.concat(formatting);
 
         callback(null, payload);
     }
@@ -137,7 +137,7 @@ function applyGroupCode(textContent, id) {
             let codeArray = codes.substring(5, codes.length - 6).split(/<\/pre>\n<pre>/g); // remove first and last <pre> then split between all lang
             let lang = [];
             for (let i in codeArray) {
-                lang[i] = langCodeRegex.exec(codeArray[i])[1]; // extact lang for code
+                lang[i] = langCodeRegex.exec(codeArray[i])[1]; // extract lang for code
                 codeArray[i] = "<pre>" + codeArray[i] + "</pre>\n"; // add pre at the start and at the end of all code
             }
             let menuTab = "<ul class='nav nav-tabs' role='tablist'>";
