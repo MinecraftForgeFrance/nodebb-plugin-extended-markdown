@@ -165,9 +165,11 @@ function generateAnchorFromHeading(heading) {
 
 function applySpoiler(textContent) {
     if (textContent.match(spoilerRegex)) {
+        let count = 0;
         textContent = textContent.replace(spoilerRegex, (match, text) => {
-            const spoilerButton = "<label>Spoiler</label><button name='spoiler' type='button'>[+]</button>";
-            const spoilerContent = `<div class='spoiler'>${text}</div>`;
+            const spoilerButton = `<label>Spoiler</label><button class="btn btn-primary" name="spoiler" type="button" data-toggle="collapse" data-target="#spoiler${count}" aria-expanded="false" aria-controls="spoiler">[+]</button>`;
+            const spoilerContent = `<div class="collapse" id="spoiler${count}"><div class="card card-body">${text}</div></div>`;
+            count++;
             return spoilerButton + spoilerContent;
         });
     }

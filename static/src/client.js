@@ -152,14 +152,10 @@ $(document).ready(function () {
 
     document.querySelectorAll('button[type=button][name=spoiler]').forEach(function(element) {
         element.onclick = function() {
-            if(!element.classList.contains("sp-open")) {
+            if(!element.classList.contains("collapsed")) {
                 element.textContent = "[-]";
-                element.nextSibling.style.display = "block";
-                element.classList.add('sp-open');
             } else {
                 element.textContent = "[+]";
-                element.nextSibling.style.display = "none";
-                element.classList.remove('sp-open');
             }
         };
     });
