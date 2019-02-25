@@ -27,7 +27,7 @@ const ExtendedMarkdown = {
         if (data && data.postData && data.postData.content) {
             data.postData.content = applyExtendedMarkdown(data.postData.content);
             data.postData.content = applyGroupCode(data.postData.content, data.postData.pid);
-            data.postData.content = applySpoiler(data.postData.content);
+            data.postData.content = applySpoiler(data.postData.content, data.postData.pid);
         }
         callback(null, data);
     },
@@ -50,7 +50,7 @@ const ExtendedMarkdown = {
         if (data) {
             data = applyExtendedMarkdown(data);
             data = applyGroupCode(data, "");
-            data = applySpoiler(data);
+            data = applySpoiler(data, "");
         }
         callback(null, data);
     },
@@ -163,12 +163,12 @@ function generateAnchorFromHeading(heading) {
     return `<a class="anchor-offset" name="${utils.slugify(heading)}"></a>`;
 }
 
-function applySpoiler(textContent) {
+function applySpoiler(textContent, id) {
     if (textContent.match(spoilerRegex)) {
         let count = 0;
         textContent = textContent.replace(spoilerRegex, (match, text) => {
-            const spoilerButton = `<label>Spoiler</label><button class="btn btn-primary" name="spoiler" type="button" data-toggle="collapse" data-target="#spoiler${count}" aria-expanded="false" aria-controls="spoiler">[+]</button>`;
-            const spoilerContent = `<div class="collapse" id="spoiler${count}"><div class="card card-body">${text}</div></div>`;
+            const spoilerButton = `<p><label>Spoiler</label><button class="btn btn-primary" name="spoiler" type="button" data-toggle="collapse" data-target="#spoiler${count + id}" aria-expanded="false" aria-controls="spoiler">[+]</button>`;
+            const spoilerContent = `<div class="collapse" id="spoiler${count + id}"><div class="card card-body spoiler">${text}</div></div></p>`;
             count++;
             return spoilerButton + spoilerContent;
         });
