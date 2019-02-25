@@ -141,7 +141,7 @@ $(document).ready(function () {
                             controls.insertIntoTexterea(textearea, "||" + strings.spoiler + "||");
                             controls.updateTexteareaSelection(textearea, selectionStart + 2, selectionStart + 2 + strings.spoiler.length);
                         } else {
-                            controls.wrapSelectionInTexteareaWith(textearean, "||", "||");
+                            controls.wrapSelectionInTexteareaWith(textearea, "||", "||");
                             controls.updateTexteareaSelection(textearea, selectionStart + 2, selectionEnd + 2);
                         }
                     });
@@ -152,11 +152,7 @@ $(document).ready(function () {
 
     document.querySelectorAll('button[type=button][name=spoiler]').forEach(function(element) {
         element.onclick = function() {
-            if(!element.classList.contains("collapsed")) {
-                element.textContent = "[-]";
-            } else {
-                element.textContent = "[+]";
-            }
+            element.children[0].className = element.attributes.getNamedItem("aria-expanded").value === "false" ? "fa fa-minus" : "fa fa-plus";
         };
     });
 });
