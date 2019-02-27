@@ -104,3 +104,10 @@ You can change the colors by override the css:
 }
 ```
 in you nodebb custom css (admin/appearance/customise).
+
+### Spoiler **New**
+
+A simple spoiler with the same syntaxe as Discord:
+`||hidden text||`
+
+![Grouped code](demo/spoiler.png?raw=true)

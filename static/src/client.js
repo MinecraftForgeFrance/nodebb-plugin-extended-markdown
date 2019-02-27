@@ -5,10 +5,10 @@
 $(document).ready(function () {
     var ExtendedMarkdown = {};
 
-    $('[data-toggle="tooltip"]').tooltip();
+    pageReady();
 
     $(window).on('action:ajaxify.end', function (ev, data) {
-        $('[data-toggle="tooltip"]').tooltip();
+        pageReady();
     });
 
     $(window).on('action:composer.enhanced', function (evt, data) {
@@ -127,11 +127,11 @@ $(document).ready(function () {
                     });
                     formatting.addButtonDispatch('spoiler', function (textearea, selectionStart, selectionEnd) {
                         if (selectionStart === selectionEnd) {
-                            controls.insertIntoTexterea(textearea, "||" + strings.spoiler + "||");
-                            controls.updateTexteareaSelection(textearea, selectionStart + 2, selectionStart + 2 + strings.spoiler.length);
+                            controls.insertIntoTextarea(textearea, "||" + strings.spoiler + "||");
+                            controls.updateTextareaSelection(textearea, selectionStart + 2, selectionStart + 2 + strings.spoiler.length);
                         } else {
-                            controls.wrapSelectionInTexteareaWith(textearea, "||", "||");
-                            controls.updateTexteareaSelection(textearea, selectionStart + 2, selectionEnd + 2);
+                            controls.wrapSelectionInTextareaWith(textearea, "||", "||");
+                            controls.updateTextareaSelection(textearea, selectionStart + 2, selectionEnd + 2);
                         }
                     });
                 });
@@ -139,9 +139,12 @@ $(document).ready(function () {
         });
     };
 
-    document.querySelectorAll('button[type=button][name=spoiler]').forEach(function(element) {
-        element.onclick = function() {
-            element.children[0].className = element.attributes.getNamedItem("aria-expanded").value === "false" ? "fa fa-minus" : "fa fa-plus";
-        };
-    });
+    function pageReady() {
+        $('[data-toggle="tooltip"]').tooltip();
+        document.querySelectorAll('button[type=button][name=spoiler]').forEach(function(element) {
+            element.onclick = function() {
+                element.children[0].className = element.attributes.getNamedItem("aria-expanded").value === "false" ? "fa fa-eye-slash" : "fa fa-eye";
+            };
+        });
+    }
 });
