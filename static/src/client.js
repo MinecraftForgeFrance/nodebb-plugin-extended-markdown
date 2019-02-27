@@ -100,17 +100,6 @@ $(document).ready(function () {
                         }
                     });
 
-                    formatting.addButtonDispatch('code', function (textarea, selectionStart, selectionEnd) {
-                        if (selectionStart === selectionEnd) {
-                            controls.insertIntoTextarea(textarea, '```java\n' + strings.code + '\n```');
-                            controls.updateTextareaSelection(textarea, selectionStart + 8, selectionStart + 8 + strings.code.length);
-                        } else {
-                            var wrapDelta = controls.wrapSelectionInTextareaWith(textarea, '```java\n', '\n```');
-                            console.log(wrapDelta);
-                            controls.updateTextareaSelection(textarea, selectionEnd + 8, selectionEnd + 8);
-                        }
-                    });
-
                     formatting.addButtonDispatch('textheader', function (textarea, selectionStart, selectionEnd) {
                         if (selectionStart === selectionEnd) {
                             controls.insertIntoTextarea(textarea, '#' + strings.textheader_anchor + '(' + strings.textheader_title + ')');

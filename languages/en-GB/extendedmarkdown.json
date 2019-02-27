@@ -1,7 +1,6 @@
 {
     "groupedcode_firstlang": "java",
     "groupedcode_secondlang": "kotlin",
-    "code": "code",
     "bubbleinfo_text": "information text",
     "textheader_anchor": "anchor",
     "textheader_title": "title",
@@ -10,7 +9,7 @@
     "align_right": "right aligned paragraph",
     "align_center": "centered paragraph",
     "align_justify": "justified paragraph",
-    "composer.formatting.code": "Code",
+    "spoiler": "spoiler",
     "composer.formatting.textheader": "Text header",
     "composer.formatting.groupedcode": "Grouped code",
     "composer.formatting.bubbleinfo": "Info bubble",
