@@ -1,7 +1,7 @@
 {
     "name": "nodebb-plugin-extended-markdown",
     "version": "1.4.0",
-    "description": "A NodeBB plugin to add some bb code, as tooltip, anchor, custom text header with background, etc. ",
+    "description": "A NodeBB plugin to add some bb code, as tooltip, anchor, custom text header with background, etc.",
     "main": "library.js",
     "repository": {
         "type": "git",
