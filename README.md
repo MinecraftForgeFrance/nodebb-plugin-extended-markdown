@@ -32,7 +32,7 @@ Tooltip allow you to add an overtext on another text. The syntax is `°text°(to
 ![Tooltip](demo/tooltip.png?raw=true)
 
 ### Anchor
-All heading (h1, h2, etc., `#` in markdown) will automatically have an anchor of named using a slug (specials chars like `:`, `,` are removed, space are remplaced by a `-`).
+All heading (h1, h2, etc., `#` in markdown) will automatically have an anchor of named using a slug (specials chars like `:`, `,` are removed, space are replaced by a `-`).
 You can then create a link to this anchor with the usual markdown syntax: `[link name](#anchor-name)`
 
 ### Text heading with background
@@ -107,7 +107,7 @@ in you nodebb custom css (admin/appearance/customise).
 
 ### Spoiler **New**
 
-A simple spoiler with the same syntaxe as Discord:
+A simple spoiler with the same syntax as Discord:
 `||hidden text||`
 
-![Grouped code](demo/spoiler.png?raw=true)
+![Spoiler](demo/spoiler.png?raw=true)
