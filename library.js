@@ -2,18 +2,18 @@
 
 const utils = require.main.require('./src/utils');
 
-const textHeaderRegex = /<p>#([a-zA-Z0-9-]*)\((.*)\)<\/p>/g;
+const textHeaderRegex = /<p dir="auto">#([a-zA-Z0-9-]*)\((.*)\)<\/p>/g;
 const tooltipRegex = /(<code.*>*?[^]<\/code>)|°(.*)°\((.*)\)/g;
 
-const codeTabRegex = /(?:<p>={3}group<\/p>\n)((?:<pre><code class=".+">[^]*?<\/code><\/pre>\n){2,})(?:<p>={3}<\/p>)/g;
+const codeTabRegex = /(?:<p dir="auto">={3}group<\/p>\n)((?:<pre><code class=".+">[^]*?<\/code><\/pre>\n){2,})(?:<p dir="auto">={3}<\/p>)/g;
 const langCodeRegex = /<code class="(.+)">/;
 
 const colorRegex = /(<code.*>*?[^]<\/code>)|%\((#[\dA-Fa-f]{6}|rgb\(\d{1,3}, ?\d{1,3}, ?\d{1,3}\)|[a-z]+)\)\[(.+?)]/g;
 
 const paragraphAndHeadingRegex = /<(h[1-6]|p)>([^]*?)<\/(?:h[1-6]|p)>/g;
-const noteRegex = /<p>!!! (info|warning|important) \[([a-zA-Z0-9]*)\]: ((.|<br \/>\n)*)<\/p>/g;
+const noteRegex = /<p dir="auto">!!! (info|warning|important) \[([a-zA-Z0-9]*)\]: ((.|<br \/>\n)*)<\/p>/g;
 
-const spoilerRegex = /(?:<p>)(?:\|\|)([^]*?)(?:\|\|)(?:<\/p>)/g;
+const spoilerRegex = /(?:<p dir="auto">)(?:\|\|)([^]*?)(?:\|\|)(?:<\/p>)/g;
 
 const noteIcons = {
     info: 'fa-info-circle',
@@ -48,6 +48,7 @@ const ExtendedMarkdown = {
     // direct preview in editor
     parseRaw(data, callback) {
         if (data) {
+            console.log(data);
             data = applyExtendedMarkdown(data);
             data = applyGroupCode(data, "");
             data = applySpoiler(data, "");
