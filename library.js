@@ -10,7 +10,8 @@ const langCodeRegex = /<code class="(.+)">/;
 
 const colorRegex = /(<code.*>*?[^]<\/code>)|%\((#[\dA-Fa-f]{6}|rgb\(\d{1,3}, ?\d{1,3}, ?\d{1,3}\)|[a-z]+)\)\[(.+?)]/g;
 
-const paragraphAndHeadingRegex = /<(h[1-6]|p)>([^]*?)<\/(?:h[1-6]|p)>/g;
+const paragraphAndHeadingRegex = /<(h[1-6]|p dir="auto")>([^]*?)<\/(h[1-6]|p)>/g;
+
 const noteRegex = /<p dir="auto">!!! (info|warning|important) \[([a-zA-Z0-9]*)\]: ((.|<br \/>\n)*)<\/p>/g;
 
 const spoilerRegex = /(?:<p dir="auto">)(?:\|\|)([^]*?)(?:\|\|)(?:<\/p>)/g;
@@ -48,7 +49,6 @@ const ExtendedMarkdown = {
     // direct preview in editor
     parseRaw(data, callback) {
         if (data) {
-            console.log(data);
             data = applyExtendedMarkdown(data);
             data = applyGroupCode(data, "");
             data = applySpoiler(data, "");
@@ -109,20 +109,20 @@ function applyExtendedMarkdown(textContent) {
     }
 
     if (textContent.match(paragraphAndHeadingRegex)) {
-        textContent = textContent.replace(paragraphAndHeadingRegex, function (match, tag, text) {
+        textContent = textContent.replace(paragraphAndHeadingRegex, function (match, tag, text, closeTag) {
             let hasStartPattern = text.startsWith("|-");
             let hasEndPattern = text.endsWith("-|");
             let anchor = tag.charAt(0) == "h" ? generateAnchorFromHeading(text) : "";
             if (text.startsWith("|=") && text.endsWith("=|")) {
-                return `<${tag} style="text-align:justify;">${anchor}${text.slice(2).slice(0, -2)}</${tag}>`;
+                return `<${tag} style="text-align:justify;">${anchor}${text.slice(2).slice(0, -2)}</${closeTag}>`;
             } else if (hasStartPattern && hasEndPattern) {
-                return `<${tag} style="text-align:center;">${anchor}${text.slice(2).slice(0, -2)}</${tag}>`;
+                return `<${tag} style="text-align:center;">${anchor}${text.slice(2).slice(0, -2)}</${closeTag}>`;
             } else if (hasEndPattern) {
-                return `<${tag} style="text-align:right;">${anchor}${text.slice(0, -2)}</${tag}>`;
+                return `<${tag} style="text-align:right;">${anchor}${text.slice(0, -2)}</${closeTag}>`;
             } else if (hasStartPattern) {
-                return `<${tag} style="text-align:left;">${anchor}${text.slice(2)}</${tag}>`;
+                return `<${tag} style="text-align:left;">${anchor}${text.slice(2)}</${closeTag}>`;
             }
-            return `<${tag}>${anchor}${text}</${tag}>`;
+            return `<${tag}>${anchor}${text}</${closeTag}>`;
         });
     }
 
