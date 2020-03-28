@@ -71,6 +71,10 @@ const ExtendedMarkdown = {
         payload.options = payload.options.concat(formatting);
 
         callback(null, payload);
+    },
+    async sanitizerConfig(config) {
+        config.allowedAttributes['a'].push('name');
+        return config;
     }
 };
 
@@ -83,6 +87,7 @@ function applyExtendedMarkdown(textContent) {
 
     if (textContent.match(textHeaderRegex)) {
         textContent = textContent.replace(textHeaderRegex, function (match, anchorId, text) {
+            console.log("text", text, "anchor", anchorId);
             return `<h2 class="text-header"><a class="anchor-offset" name="${anchorId}"></a>${text}</h2>`;
         });
     }
@@ -113,6 +118,7 @@ function applyExtendedMarkdown(textContent) {
             let hasStartPattern = text.startsWith("|-");
             let hasEndPattern = text.endsWith("-|");
             let anchor = tag.charAt(0) == "h" ? generateAnchorFromHeading(text) : "";
+            console.log("text", text, "anchor", anchor);
             if (text.startsWith("|=") && text.endsWith("=|")) {
                 return `<${tag} style="text-align:justify;">${anchor}${text.slice(2).slice(0, -2)}</${closeTag}>`;
             } else if (hasStartPattern && hasEndPattern) {

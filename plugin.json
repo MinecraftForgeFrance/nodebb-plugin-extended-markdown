@@ -10,7 +10,8 @@
         { "hook": "filter:parse.signature", "method": "parseSignature" },
         { "hook": "filter:parse.aboutme", "method": "parseAboutMe"},
         { "hook": "filter:parse.raw", "method": "parseRaw"},
-        { "hook": "filter:composer.formatting", "method": "registerFormatting"}
+        { "hook": "filter:composer.formatting", "method": "registerFormatting"},
+        { "hook": "filter:sanitize.config", "method": "sanitizerConfig"}
     ],
     "scripts": [
         "static/src/client.js"
