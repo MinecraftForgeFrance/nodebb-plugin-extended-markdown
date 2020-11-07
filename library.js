@@ -1,6 +1,6 @@
 'use strict';
 
-const utils = require.main.require('./src/utils');
+const slugify = require.main.require('./src/slugify');
 
 const textHeaderRegex = /<p dir="auto">#([a-zA-Z0-9-]*)\((.*)\)<\/p>/g;
 const tooltipRegex = /(<code.*>*?[^]<\/code>)|°(.*)°\((.*)\)/g;
@@ -164,7 +164,7 @@ function capitalizeFirstLetter(name) {
 }
 
 function generateAnchorFromHeading(heading) {
-    return `<a class="anchor-offset" name="${utils.slugify(heading)}"></a>`;
+    return `<a class="anchor-offset" name="${slugify(heading)}"></a>`;
 }
 
 function applySpoiler(textContent, id) {
