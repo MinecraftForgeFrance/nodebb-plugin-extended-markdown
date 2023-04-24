@@ -1,0 +1,22 @@
+{
+    "groupedcode_firstlang": "java",
+    "groupedcode_secondlang": "kotlin",
+    "bubbleinfo_text": "texte d'information",
+    "textheader_anchor": "ancre",
+    "textheader_title": "titre",
+    "color_text": "Texte à colorer",
+    "align_left": "paragraphe aligné à gauche",
+    "align_right": "paragraphe aligné à droite",
+    "align_center": "paragraphe centré",
+    "align_justify": "paragraphe justifié",
+    "spoiler": "spoiler",
+    "composer.formatting.textheader": "Entête de texte",
+    "composer.formatting.groupedcode": "Code groupé",
+    "composer.formatting.bubbleinfo": "Bulle d'information",
+    "composer.formatting.color": "Couleur",
+    "composer.formatting.left": "Aligner à gauche",
+    "composer.formatting.center": "Aligner au centre",
+    "composer.formatting.right": "Aligner à droite",
+    "composer.formatting.justify": "Justifié",
+    "composer.formatting.spoiler": "Spoiler"
+}

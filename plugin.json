@@ -1,0 +1,20 @@
+{
+    "id": "nodebb-plugin-extended-markdown",
+    "url": "https://github.com/MinecraftForgeFrance/nodebb-plugin-extended-markdown",
+    "library": "./library.js",
+    "less": [
+        "static/style.scss"
+    ],
+    "hooks": [
+        { "hook": "filter:parse.post", "method": "parsePost"},
+        { "hook": "filter:parse.signature", "method": "parseSignature" },
+        { "hook": "filter:parse.aboutme", "method": "parseAboutMe"},
+        { "hook": "filter:parse.raw", "method": "parseRaw"},
+        { "hook": "filter:composer.formatting", "method": "registerFormatting"},
+        { "hook": "filter:sanitize.config", "method": "sanitizerConfig"}
+    ],
+    "scripts": [
+        "static/src/client.js"
+    ],
+    "languages": "languages"
+}
