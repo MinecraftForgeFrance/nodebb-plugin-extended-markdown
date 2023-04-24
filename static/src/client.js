@@ -21,11 +21,13 @@ $(document).ready(function () {
             // params is (language, namespace, callback)
             translator.getTranslations(window.config.userLang || window.config.defaultLang, 'extendedmarkdown', function (strings) {
                 var composerTextarea;
-                var colorPickerButton = document.querySelector('li[data-format="color"]');
+                var colorPickerButton = document.querySelector('a[data-format="color"]');
                 var hiddenPicker = document.createElement("input");
                 hiddenPicker.style.visibility = 'hidden';
                 hiddenPicker.style.width = 0;
                 hiddenPicker.style.padding = 0;
+                hiddenPicker.style.margin = 0;
+                hiddenPicker.style.height = 0;
                 hiddenPicker.style.border = 0;
                 hiddenPicker.type = 'color';
                 hiddenPicker.id = 'nodebb-plugin-extended-markdown-colorpicker';
@@ -132,8 +134,8 @@ $(document).ready(function () {
     };
 
     function pageReady() {
-        $('[data-toggle="tooltip"]').tooltip();
-        document.querySelectorAll('button[type=button][name=spoiler]').forEach(function(element) {
+        document.querySelectorAll('.collapsed').forEach(function (element) {
+            element.children[0].className = "fa fa-eye-slash"
             element.onclick = function() {
                 element.children[0].className = element.attributes.getNamedItem("aria-expanded").value === "false" ? "fa fa-eye-slash" : "fa fa-eye";
             };
