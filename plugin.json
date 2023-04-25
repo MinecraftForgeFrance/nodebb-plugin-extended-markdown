@@ -3,11 +3,7 @@
     "url": "https://github.com/MinecraftForgeFrance/nodebb-plugin-extended-markdown",
     "library": "./library.js",
     "less": [
-<<<<<<< HEAD
-        "static/style.less"
-=======
         "static/style.scss"
->>>>>>> test
     ],
     "hooks": [
         { "hook": "filter:parse.post", "method": "parsePost"},
