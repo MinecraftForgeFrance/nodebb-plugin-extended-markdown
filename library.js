@@ -171,8 +171,21 @@ function applySpoiler(textContent, id) {
     if (textContent.match(spoilerRegex)) {
         let count = 0;
         textContent = textContent.replace(spoilerRegex, (match, text) => {
+<<<<<<< HEAD
             const spoilerButton = `<p><button class="btn btn-sm btn-primary" name="spoiler" type="button" data-toggle="collapse" data-target="#spoiler${count + id}" aria-expanded="false" aria-controls="spoiler${count + id}">Spoiler <i class="fa fa-eye"></i></button>`;
             const spoilerContent = `<div class="collapse" id="spoiler${count + id}"><div class="card card-body spoiler">${text}</div></div></p>`;
+=======
+            const spoilerButton = `
+            <button class="btn btn-primary collapsed" type="button" data-bs-toggle="collapse"
+            data-bs-target="#spoiler${count + id}" aria-expanded="false" aria-controls="spoiler${count + id}">
+            Spoiler <i class="fa fa-eye"></i></button>
+            `
+            const spoilerContent = `<div 
+            class="collapse" 
+            id="spoiler${count + id}">
+                <div class="card card-body spoiler">
+                ${text}</div></div></p>`;
+>>>>>>> test
             count++;
             return spoilerButton + spoilerContent;
         });
