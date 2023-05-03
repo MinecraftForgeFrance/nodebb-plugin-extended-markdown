@@ -1,5 +1,5 @@
 {
-    "groupedcode_firstlang": "ג'אוה",
+    "groupedcode_firstlang": "java",
     "groupedcode_secondlang": "kotlin",
     "bubbleinfo_text": "טקסט מידע",
     "textheader_anchor": "anchor",
@@ -16,7 +16,7 @@
     "composer.formatting.color": "צבע",
     "composer.formatting.left": "יישור לשמאל",
     "composer.formatting.center": "מרכוז",
-    "composer.formatting.right": "יישור ימינה",
-    "composer.formatting.justify": "הצדקה",
+    "composer.formatting.right": "יישור לימין",
+    "composer.formatting.justify": "יישור לשני הצדדים",
     "composer.formatting.spoiler": "ספויילר"
 }
