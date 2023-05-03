@@ -1,0 +1,113 @@
+$text-header-bg: #01243c;
+$text-header-color: #ffffff;
+
+.text-header {
+    background-color: $text-header-bg;
+    text-align: center;
+    color: $text-header-color;
+    box-shadow: 0 0 15px rgba(0,0,0,.4) inset;
+    padding: 7px;
+    font-weight: bold;
+}
+
+$extended-markdown-tooltip-color: #337ab7;
+$extended-markdown-tooltip-hover-color: #23527c;
+
+.extended-markdown-tooltip {
+    color: $extended-markdown-tooltip-color;
+    cursor: pointer;
+}
+
+.extended-markdown-tooltip:hover {
+    color: $extended-markdown-tooltip-hover-color;
+    cursor: pointer;
+}
+
+// add an offset to compensate the fixed navbar
+a.anchor-offset {
+    display: block;
+    position: relative;
+    top: -60px;
+    visibility: hidden;
+}
+
+$admonition-bg: #c8e7fa;
+$admonition-box-shadow: 0 1px 2px #dbdbdb;
+$admonition-title-bg: #fbf9f9;
+$admonition-title-color: #fbf9f9;
+$admonition-important-bg: #c0f2e8;
+$admonition-important-title-bg: #7de8d2;
+$admonition-info-bg: #c0dcf2;
+$admonition-info-title-bg: #7dbae8;
+$admonition-warning-bg: #f2d9c0;
+$admonition-warning-title-bg: #e8b37d;
+
+.admonition {
+    border-radius: 3px;
+    box-shadow: $admonition-box-shadow;
+    margin-bottom: .625rem;
+    background: $admonition-bg;
+}
+
+.admonition p { 
+    padding: 0 1rem; 
+}
+
+.admonition pre { 
+    margin-left: 1rem; 
+    margin-right: 1rem; 
+}
+
+.admonition .admonition-title {
+    font-weight: 700;
+    padding: .2rem 1rem;
+    font-size: 1.5rem;
+    color: $admonition-title-color;
+    margin: 0;
+    border-radius: 3px 3px 0 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    background: $admonition-title-bg;
+}
+
+.admonition .admonition-title i.fa { 
+    margin-right: 5px; 
+}
+
+.admonition >:nth-child(2) { 
+    margin-top: 0.5rem; 
+}
+
+.admonition >:not(pre):last-child { 
+    padding-bottom: .5rem; 
+}
+
+.admonition.important { 
+    background: $admonition-important-bg; 
+}
+
+.admonition.important .admonition-title { 
+    background: $admonition-important-title-bg; 
+}
+
+.admonition.info { 
+    background: $admonition-info-bg; 
+}
+
+.admonition.info .admonition-title { 
+    background: $admonition-info-title-bg; 
+}
+
+.admonition.warning { 
+    background: $admonition-warning-bg; 
+}
+
+.admonition.warning .admonition-title { 
+    background: $admonition-warning-title-bg; 
+}
+
+$spoiler-bg: rgba(1, 1, 1, 0.13);
+
+.spoiler {
+    background-color: $spoiler-bg;
+    padding: 18px;
+}
