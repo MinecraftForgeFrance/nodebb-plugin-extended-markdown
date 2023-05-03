@@ -2,8 +2,8 @@
     "id": "nodebb-plugin-extended-markdown",
     "url": "https://github.com/MinecraftForgeFrance/nodebb-plugin-extended-markdown",
     "library": "./library.js",
-    "less": [
-        "static/style.scss"
+    "scss": [
+        "public/scss/style.scss"
     ],
     "hooks": [
         { "hook": "filter:parse.post", "method": "parsePost"},
@@ -14,7 +14,7 @@
         { "hook": "filter:sanitize.config", "method": "sanitizerConfig"}
     ],
     "scripts": [
-        "static/src/client.js"
+        "public/js/client.js"
     ],
-    "languages": "languages"
+    "languages": "public/languages"
 }

@@ -1,17 +1,14 @@
-$text-header-bg: #01243c;
-$text-header-color: #ffffff;
+@import './variables';
 
 .text-header {
-    background-color: $text-header-bg;
+    background-color: $extended-markdown-text-header-bg;
     text-align: center;
-    color: $text-header-color;
+    color: $extended-markdown-text-header-color;
     box-shadow: 0 0 15px rgba(0,0,0,.4) inset;
     padding: 7px;
     font-weight: bold;
 }
 
-$extended-markdown-tooltip-color: #337ab7;
-$extended-markdown-tooltip-hover-color: #23527c;
 
 .extended-markdown-tooltip {
     color: $extended-markdown-tooltip-color;
@@ -27,26 +24,16 @@ $extended-markdown-tooltip-hover-color: #23527c;
 a.anchor-offset {
     display: block;
     position: relative;
-    top: -60px;
+    top: -50px;
     visibility: hidden;
 }
 
-$admonition-bg: #c8e7fa;
-$admonition-box-shadow: 0 1px 2px #dbdbdb;
-$admonition-title-bg: #fbf9f9;
-$admonition-title-color: #fbf9f9;
-$admonition-important-bg: #c0f2e8;
-$admonition-important-title-bg: #7de8d2;
-$admonition-info-bg: #c0dcf2;
-$admonition-info-title-bg: #7dbae8;
-$admonition-warning-bg: #f2d9c0;
-$admonition-warning-title-bg: #e8b37d;
 
 .admonition {
     border-radius: 3px;
-    box-shadow: $admonition-box-shadow;
+    box-shadow: $extended-markdown-admonition-box-shadow;
     margin-bottom: .625rem;
-    background: $admonition-bg;
+    background: $extended-markdown-admonition-bg;
 }
 
 .admonition p { 
@@ -61,12 +48,12 @@ $admonition-warning-title-bg: #e8b37d;
 .admonition .admonition-title {
     font-weight: 700;
     padding: .2rem 1rem;
-    font-size: 1.5rem;
-    color: $admonition-title-color;
+    font-size: 1.2rem;
+    color: $extended-markdown-admonition-title-color;
     margin: 0;
     border-radius: 3px 3px 0 0;
     border-bottom: 1px solid rgba(0,0,0,0.1);
-    background: $admonition-title-bg;
+    background: $extended-markdown-admonition-title-bg;
 }
 
 .admonition .admonition-title i.fa { 
@@ -82,32 +69,30 @@ $admonition-warning-title-bg: #e8b37d;
 }
 
 .admonition.important { 
-    background: $admonition-important-bg; 
+    background: $extended-markdown-admonition-important-bg;
 }
 
 .admonition.important .admonition-title { 
-    background: $admonition-important-title-bg; 
+    background: $extended-markdown-admonition-important-title-bg;
 }
 
 .admonition.info { 
-    background: $admonition-info-bg; 
+    background: $extended-markdown-admonition-info-bg;
 }
 
 .admonition.info .admonition-title { 
-    background: $admonition-info-title-bg; 
+    background: $extended-markdown-admonition-info-title-bg;
 }
 
 .admonition.warning { 
-    background: $admonition-warning-bg; 
+    background: $extended-markdown-admonition-warning-bg;
 }
 
 .admonition.warning .admonition-title { 
-    background: $admonition-warning-title-bg; 
+    background: $extended-markdown-admonition-warning-title-bg;
 }
 
-$spoiler-bg: rgba(1, 1, 1, 0.13);
-
 .spoiler {
-    background-color: $spoiler-bg;
+    background-color: $extended-markdown-spoiler-bg;
     padding: 18px;
 }
