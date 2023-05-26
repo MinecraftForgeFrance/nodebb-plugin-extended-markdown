@@ -1,6 +1,6 @@
 {
     "name": "nodebb-plugin-extended-markdown",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "A NodeBB plugin adding more features to markdown: color, text alignment, tooltip, anchor, custom text header with background, etc.",
     "main": "library.js",
     "repository": {

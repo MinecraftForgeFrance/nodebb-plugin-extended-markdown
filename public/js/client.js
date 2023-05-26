@@ -21,7 +21,7 @@ $(document).ready(function () {
             // params is (language, namespace, callback)
             translator.getTranslations(window.config.userLang || window.config.defaultLang, 'extendedmarkdown', function (strings) {
                 var composerTextarea;
-                var colorPickerButton = document.querySelector('a[data-format="color"]');
+                var colorPickerButton = document.querySelector('.btn[data-format="color"]');
                 var hiddenPicker = document.createElement("input");
                 hiddenPicker.style.visibility = 'hidden';
                 hiddenPicker.style.width = 0;
