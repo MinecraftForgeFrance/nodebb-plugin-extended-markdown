@@ -134,11 +134,11 @@ $(document).ready(function () {
     };
 
     async function pageReady() {
-        // TODO: find a way to import bootstrap, required for tooltip.
-        //var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-        //tooltipTriggerList.map(function (tooltipTriggerEl) {
-        //    return new bootstrap.Tooltip(tooltipTriggerEl);
-        //});
+        require(['bootstrap'], function (bootstrap) {
+            document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function (element) {
+                new bootstrap.Tooltip(element);
+            });
+        });
 
         document.querySelectorAll('button.extended-markdown-spoiler').forEach(function (element) {
             element.onclick = function() {

@@ -14,11 +14,11 @@ The syntaxe is:
 `%(#hexColorCode)[colored text]`
 
 ### Text align
-You can align right by adding `-|` at the end of your paragraph. Likewise, you can align left a text by adding `|-` at the begin of your paragraph.
+You can align right by adding `-|` at the end of your paragraph. Likewise, you can align left a text by adding `|-` at the beginning of your paragraph.
 Combining the two will center the text.
 
 ![Align](demo/align.png?raw=true)
-You can also justify your paragraph by adding `|=` at the begin and `=|` at the end.
+You can also justify your paragraph by adding `|=` at the beginning and `=|` at the end.
 
 /!\ Warning, text align is applied on the whole paragraph, so this will not work:
 ``` 
@@ -26,13 +26,20 @@ You can also justify your paragraph by adding `|=` at the begin and `=|` at the 
 This is still the same paragraph! You need to add two new lines to start a new paragraph
 ```
 
+### Spoiler
+
+A simple spoiler with the same syntax as Discord:
+`||hidden text||`
+
+![Spoiler](demo/spoiler.png?raw=true)
+
 ### Tooltip
-Tooltip allow you to add an overtext on another text. The syntax is `°text°(tooltip text)`. You can use `fa-info` as text, in this case it will show the fa-info icon:
+Tooltip allow you to add a hover-text on another text. The syntax is `°text°(tooltip text)`. You can use `fa-info` as text, in this case it will use fa-info icon:
 
 ![Tooltip](demo/tooltip.png?raw=true)
 
 ### Anchor
-All heading (h1, h2, etc., `#` in markdown) will automatically have an anchor of named using a slug (specials chars like `:`, `,` are removed, space are replaced by a `-`).
+All heading (h1, h2, etc., `#` in markdown) will automatically have an anchor using a slug (specials chars like `:`, `,` are removed, space are replaced by a `-`).
 You can then create a link to this anchor with the usual markdown syntax: `[link name](#anchor-name)`
 
 ### Text heading with background
@@ -40,16 +47,16 @@ Specially added for Minecraft Forge France's tutorials, this one is a h2 with a 
 
 ![Heading with background](demo/heading.png?raw=true)
 
-Currently the plugin haven't any option to change the color, but you can still override the css by adding:
+You can override the style using custom css:
 ```css
 .text-header {
     background-color: anotherColor;
 }
 ```
-in you nodebb custom css (admin/appearance/customise).
+(Admin cp -> Appearance -> Custom Content -> Custom CSS/SASS).
 
 ### Grouped code
-Also added for the needs of our tutorials, it allow to show multiples languages with nice tabs. The syntaxe is a bit complex:
+Also added for the needs of our tutorials, it allows showing multiples languages with nice tabs. The syntax is a bit complex:
 ```
 ===group
 \```python
@@ -103,11 +110,4 @@ You can change the colors by override the css:
     background:#e8b37d;
 }
 ```
-in you nodebb custom css (admin/appearance/customise).
-
-### Spoiler
-
-A simple spoiler with the same syntax as Discord:
-`||hidden text||`
-
-![Spoiler](demo/spoiler.png?raw=true)
+(Admin cp -> Appearance -> Custom Content -> Custom CSS/SASS).
