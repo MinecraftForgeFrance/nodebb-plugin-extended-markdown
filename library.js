@@ -24,38 +24,38 @@ const noteIcons = {
 
 const ExtendedMarkdown = {
     // post
-    parsePost(data, callback) {
+    async parsePost(data) {
         if (data && data.postData && data.postData.content) {
             data.postData.content = applyExtendedMarkdown(data.postData.content);
             data.postData.content = applyGroupCode(data.postData.content, data.postData.pid);
             data.postData.content = applySpoiler(data.postData.content, data.postData.pid);
         }
-        callback(null, data);
+        return data;
     },
     // user signature
-    parseSignature(data, callback) {
+    async parseSignature(data) {
         if (data && data.userData && data.userData.signature) {
             data.userData.signature = applyExtendedMarkdown(data.userData.signature);
         }
-        callback(null, data);
+        return data;
     },
     // user description
-    parseAboutMe(data, callback) {
+    async parseAboutMe(data) {
         if (data) {
             data = applyExtendedMarkdown(data);
         }
-        callback(null, data);
+        return data;
     },
     // direct preview in editor
-    parseRaw(data, callback) {
+    async parseRaw(data) {
         if (data) {
             data = applyExtendedMarkdown(data);
             data = applyGroupCode(data, "");
             data = applySpoiler(data, "");
         }
-        callback(null, data);
+        return data;
     },
-    registerFormatting(payload, callback) {
+    async registerFormatting(payload) {
         const formatting = [
             { name: "color", className: "fa fa-eyedropper", title: "[[extendedmarkdown:composer.formatting.color]]" },
             { name: "left", className: "fa fa-align-left", title: "[[extendedmarkdown:composer.formatting.left]]" },
@@ -70,7 +70,7 @@ const ExtendedMarkdown = {
 
         payload.options = payload.options.concat(formatting);
 
-        callback(null, payload);
+        return payload;
     },
     async sanitizerConfig(config) {
         config.allowedAttributes['a'].push('name');
