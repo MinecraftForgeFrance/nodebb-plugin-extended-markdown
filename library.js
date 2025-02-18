@@ -178,7 +178,7 @@ function applySpoiler(textContent, id) {
 
             const spoilerContent = `
                 <div class="collapse" id="spoiler${count + id}">
-                    <div class="card card-body spoiler">${text}</div>
+                    <div class="card card-body spoiler"><p dir="auto">${text}</p></div>
                 </div>`;
             count++;
             return `<p>${spoilerButton}${spoilerContent}</p>`;
