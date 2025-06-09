@@ -1,0 +1,22 @@
+{
+    "groupedcode_firstlang": "java",
+    "groupedcode_secondlang": "kotlin",
+    "bubbleinfo_text": "信息文字",
+    "textheader_anchor": "anchor",
+    "textheader_title": "标题",
+    "color_text": "彩色文字",
+    "align_left": "左对齐段落",
+    "align_right": "右对齐段落",
+    "align_center": "居中段落",
+    "align_justify": "两端对齐段落",
+    "spoiler": "剧透文本",
+    "composer.formatting.textheader": "带背景的标题",
+    "composer.formatting.groupedcode": "分组代码",
+    "composer.formatting.bubbleinfo": "信息气泡",
+    "composer.formatting.color": "彩色文本",
+    "composer.formatting.left": "左对齐",
+    "composer.formatting.center": "居中对齐",
+    "composer.formatting.right": "右对齐",
+    "composer.formatting.justify": "两端对齐",
+    "composer.formatting.spoiler": "剧透"
+}
