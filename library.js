@@ -3,7 +3,7 @@
 const slugify = require.main.require('./src/slugify');
 
 const textHeaderRegex = /<p dir="auto">#([a-zA-Z0-9-]*)\((.*)\)<\/p>/g;
-const tooltipRegex = /(<code.*>*?[^]<\/code>)|°(.*)°\((.*)\)/g;
+const tooltipRegex = /(<code.*>*?[^]<\/code>)|°([^°]*)°\(([^)]*)\)/g;
 
 const codeTabRegex = /(?:<p dir="auto">={3}group<\/p>\n)((?:<pre><code class=".+">[^]*?<\/code><\/pre>\n){2,})(?:<p dir="auto">={3}<\/p>)/g;
 const langCodeRegex = /<code class="(.+)">/;
