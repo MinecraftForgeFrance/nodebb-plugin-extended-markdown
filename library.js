@@ -2,19 +2,19 @@
 
 const slugify = require.main.require('./src/slugify');
 
-const textHeaderRegex = /<p dir="auto">#([a-zA-Z0-9-]*)\((.*)\)<\/p>/g;
+const textHeaderRegex = /<p dir="[^"]*">#([a-zA-Z0-9-]*)\((.*)\)<\/p>/g;
 const tooltipRegex = /(<code.*>*?[^]<\/code>)|°([^°]*)°\(([^)]*)\)/g;
 
-const codeTabRegex = /(?:<p dir="auto">={3}group<\/p>\n)((?:<pre><code class=".+">[^]*?<\/code><\/pre>\n){2,})(?:<p dir="auto">={3}<\/p>)/g;
+const codeTabRegex = /(?:<p dir="[^"]*">={3}group<\/p>\n)((?:<pre><code class=".+">[^]*?<\/code><\/pre>\n){2,})(?:<p dir="[^"]*">={3}<\/p>)/g;
 const langCodeRegex = /<code class="(.+)">/;
 
 const colorRegex = /(<code.*>*?[^]<\/code>)|%\((#[\dA-Fa-f]{6}|rgb\(\d{1,3}, ?\d{1,3}, ?\d{1,3}\)|[a-z]+)\)\[(.+?)]/g;
 
-const paragraphAndHeadingRegex = /<(h[1-6]|p dir="auto")>([^]*?)<\/(h[1-6]|p)>/g;
+const paragraphAndHeadingRegex = /<(h[1-6]|p dir="[^"]*")>([^]*?)<\/(h[1-6]|p)>/g;
 
-const noteRegex = /<p dir="auto">!!! (info|warning|important) \[([a-zA-Z0-9]*)\]: ((.|<br \/>\n)*)<\/p>/g;
+const noteRegex = /<p dir="[^"]*">!!! (info|warning|important) \[([a-zA-Z0-9]*)\]: ((.|<br \/>\n)*)<\/p>/g;
 
-const spoilerRegex = /(?:<p dir="auto">)(?:\|\|)([^]*?)(?:\|\|)(?:<\/p>)/g;
+const spoilerRegex = /(?:<p dir="[^"]*">)(?:\|\|)([^]*?)(?:\|\|)(?:<\/p>)/g;
 
 const noteIcons = {
     info: 'fa-info-circle',
