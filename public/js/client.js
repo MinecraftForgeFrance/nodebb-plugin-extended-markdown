@@ -121,12 +121,21 @@ $(document).ready(function () {
                     }
                 });
                 formatting.addButtonDispatch('spoiler', function (textarea, selectionStart, selectionEnd) {
+                    // a spoiler must stand on its own line: add line breaks only where they are missing
+                    var value = textarea.value;
+                    // wrapSelectionInTextareaWith keeps leading/trailing whitespace of the selection outside the wrapper
+                    var selection = /^(\s*)[\s\S]*?(\s*)$/.exec(value.slice(selectionStart, selectionEnd));
+                    var contentStart = selectionStart + selection[1].length;
+                    var contentEnd = selectionEnd - selection[2].length;
+                    var prefix = contentStart === 0 || value[contentStart - 1] === '\n' ? '' : '\n';
+                    var suffix = contentEnd === value.length || value[contentEnd] === '\n' ? '' : '\n';
+                    var offset = prefix.length + 2;
                     if (selectionStart === selectionEnd) {
-                        controls.insertIntoTextarea(textarea, "||" + strings.spoiler + "||");
-                        controls.updateTextareaSelection(textarea, selectionStart + 2, selectionStart + 2 + strings.spoiler.length);
+                        controls.insertIntoTextarea(textarea, prefix + '||' + strings.spoiler + '||' + suffix);
+                        controls.updateTextareaSelection(textarea, selectionStart + offset, selectionStart + offset + strings.spoiler.length);
                     } else {
-                        controls.wrapSelectionInTextareaWith(textarea, "||", "||");
-                        controls.updateTextareaSelection(textarea, selectionStart + 2, selectionEnd + 2);
+                        controls.wrapSelectionInTextareaWith(textarea, prefix + '||', '||' + suffix);
+                        controls.updateTextareaSelection(textarea, contentStart + offset, contentEnd + offset);
                     }
                 });
             });
