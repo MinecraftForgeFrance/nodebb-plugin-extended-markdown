@@ -31,6 +31,8 @@ This is still the same paragraph! You need to add two new lines to start a new p
 A simple spoiler with the same syntax as Discord:
 `||hidden text||`
 
+The spoiler has to stand on its own line(s): a line break before the opening `||` and after the closing `||` is enough, a blank line is not required. The composer button adds the missing line breaks for you.
+
 ![Spoiler](demo/spoiler.png?raw=true)
 
 ### Tooltip
