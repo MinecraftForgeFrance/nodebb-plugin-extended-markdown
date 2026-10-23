@@ -171,13 +171,16 @@ function applySpoiler(textContent, id) {
     if (textContent.match(spoilerRegex)) {
         let count = 0;
         textContent = textContent.replace(spoilerRegex, (match, text) => {
+            // "<pid>-<n>": adding the numbers made the second spoiler of post 2200 "spoiler2201",
+            // the id of the first spoiler of post 2201, and the button then opened the wrong one
+            const spoilerId = `spoiler${id === "" ? "" : `${id}-`}${count}`;
             const spoilerButton = `
-                <button class="btn btn-primary extended-markdown-spoiler" type="button" name="spoiler" data-bs-toggle="collapse" data-bs-target="#spoiler${count + id}" aria-expanded="false" aria-controls="spoiler${count + id}">
+                <button class="btn btn-primary extended-markdown-spoiler" type="button" name="spoiler" data-bs-toggle="collapse" data-bs-target="#${spoilerId}" aria-expanded="false" aria-controls="${spoilerId}">
                     Spoiler <i class="fa fa-eye"></i>
                 </button>`;
 
             const spoilerContent = `
-                <div class="collapse" id="spoiler${count + id}">
+                <div class="collapse" id="${spoilerId}">
                     <div class="card card-body spoiler"><p dir="auto">${text}</p></div>
                 </div>`;
             count++;
